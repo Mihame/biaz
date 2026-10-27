@@ -1,0 +1,568 @@
+export const BRAND_NAME = "BIAZ Shoes";
+export const WHATSAPP_PHONE = "+212665662572";
+export const WHATSAPP_DISPLAY = "+212 665-662572";
+export const STORE_CITY_FR = "Casablanca, Maroc";
+export const STORE_CITY_AR = "الدار البيضاء، المغرب";
+export const STORE_CITY = STORE_CITY_FR;
+
+export const TRANSLATIONS = {
+  fr: {
+    brandName: BRAND_NAME,
+    tagline: "Souliers en cuir pour homme au Maroc",
+    announcement: "Livraison disponible partout au Maroc · Conseil et commande directe via WhatsApp au +212 665-662572",
+    
+    // Exactly 4 Navigation Links
+    nav: {
+      home: "Accueil",
+      products: "Produits",
+      about: "À propos",
+      contact: "Contact",
+      whatsapp: "Commander sur WhatsApp",
+      changeLang: "العربية",
+    },
+
+    // 1. Home Page
+    home: {
+      hero: {
+        kicker: "BIAZ Shoes · Souliers en cuir masculin",
+        title: "L'élégance intemporelle du soulier en cuir.",
+        subtitle: "Des modèles raffinés confectionnés pour l'homme contemporain au Maroc. Richelieus, Derbies et Mocassins conçus pour allier confort, style et durabilité.",
+        cta: "Découvrir la collection",
+        secondaryCta: "Notre démarche",
+      },
+      categoriesTitle: "Nos types de souliers",
+      categoriesSubtitle: "Des lignes classiques et modernes adaptées à chaque occasion.",
+      types: {
+        oxford: {
+          name: "Richelieu Oxford",
+          desc: "La référence du vestiaire formel et des cérémonies.",
+        },
+        derby: {
+          name: "Derby",
+          desc: "Laçage ouvert et allure distinguée pour le quotidien.",
+        },
+        loafer: {
+          name: "Mocassin Loafer",
+          desc: "Confort souple et raffinement décontracté.",
+        },
+        boot: {
+          name: "Bottine",
+          desc: "Caractère affirmé et maintien élégant de cheville.",
+        },
+      },
+      featuredTitle: "Modèles à l'honneur",
+      featuredSubtitle: "Une sélection de souliers appréciés pour leur tenue et leurs finitions.",
+      orderWhatsapp: "Commander via WhatsApp",
+      viewAllProducts: "Voir toute la collection",
+      craftTitle: "L'attention aux détails",
+      craftSubtitle: "Chaque élément compte pour assurer la longévité de votre paire.",
+      craftItems: [
+        {
+          title: "Cuir pleine fleur sélectionné",
+          desc: "Un cuir souple qui s'embellit avec le temps et prend une patine naturelle remarquable.",
+        },
+        {
+          title: "Coutures nettes et précises",
+          desc: "Un assemblage rigoureux des pièces de tige pour garantir une résistance durable à l'usage.",
+        },
+        {
+          title: "Doublure intérieure en cuir",
+          desc: "Un chaussant respirant et doux au contact du pied pour un confort prolongé.",
+        },
+        {
+          title: "Semelle travaillée",
+          desc: "Équilibre étudié entre amorti, flexibilité et isolation du sol au quotidien.",
+        },
+      ],
+      brandTeaser: {
+        title: "BIAZ Shoes au Maroc",
+        text: "BIAZ Shoes propose une collection de souliers en cuir pour les hommes soucieux d'élégance et de sobriété. Nous privilégions des coupes équilibrées, des matériaux éprouvés et une relation directe avec chaque client.",
+        linkText: "En savoir plus sur notre histoire",
+      },
+      whatsappSection: {
+        title: "Un conseil sur votre pointure ou votre modèle ?",
+        subtitle: "Notre équipe est à votre écoute sur WhatsApp pour vous guider avant votre commande.",
+        buttonText: "Échanger sur WhatsApp",
+        numberText: "Disponible au",
+      },
+    },
+
+    // 2. Products Page
+    products: {
+      pageTitle: "Collection de souliers",
+      pageSubtitle: "Découvrez nos modèles disponibles au Maroc. Commandez directement en échangeant avec nous sur WhatsApp.",
+      filterAll: "Tous les modèles",
+      filterOxford: "Richelieus",
+      filterDerby: "Derbies",
+      filterLoafer: "Mocassins",
+      filterBoot: "Bottines",
+      sortBy: "Trier par",
+      sortDefault: "Ordre suggéré",
+      sortPriceAsc: "Prix croissant",
+      sortPriceDesc: "Prix décroissant",
+      sizesLabel: "Pointures :",
+      colorsLabel: "Teinte :",
+      mad: "MAD",
+      orderButton: "Commander via WhatsApp",
+      viewDetails: "Voir les détails & Commander",
+      directMessagePrefix: "Bonjour BIAZ Shoes, je souhaite commander le modèle :",
+      sizeHint: "Sélectionnez votre pointure puis cliquez pour voir les détails ou commander directement via WhatsApp.",
+      noResults: "Aucun soulier ne correspond à ce filtre actuellement.",
+    },
+
+    // Product Detail & Order Flow
+    productDetail: {
+      backToProducts: "Retour à la collection",
+      backToHome: "Retour à l'accueil",
+      inStock: "En stock pour expédition immédiate",
+      lowStock: "Stock limité - Dernières paires",
+      madeToOrder: "Confection sur commande",
+      selectSizePrompt: "Veuillez choisir votre pointure",
+      sizeSelected: "Pointure sélectionnée :",
+      quantity: "Quantité :",
+      freeDeliveryBadge: "Livraison offerte partout au Maroc",
+      codBadge: "Paiement en espèces à la livraison après essayage",
+      exchangeBadge: "Échange de pointure gratuit",
+      specsTitle: "Caractéristiques & Savoir-faire artisanal",
+      leatherType: "Type de cuir",
+      leatherOrigin: "Origine des peausseries",
+      construction: "Montage & Couture",
+      lining: "Doublure intérieure",
+      sole: "Semelle extérieure",
+      lastWidth: "Largeur du chaussant",
+      finish: "Finitions & Cirage",
+      careTitle: "Guide d'entretien du soulier",
+      betweenSizesTitle: "Conseil pointure BIAZ",
+      orderCta: "Passer commande maintenant",
+      directOrderSubtitle: "Remplissez le formulaire ci-dessous pour finaliser votre commande en toute simplicité.",
+      zoomHint: "Cliquez pour agrandir les détails du cuir et des coutures",
+      closeZoom: "Fermer l'agrandissement",
+      angles: {
+        side: "Profil extérieur",
+        top: "Vue de dessus",
+        threeQuarter: "Trois-quarts face",
+        sole: "Semelle extérieure",
+        stitching: "Macro couture trépointe",
+        lining: "Doublure intérieure",
+        scale: "Grain du cuir",
+        onFoot: "Porté au pied",
+      },
+    },
+
+    orderForm: {
+      title: "Formulaire de commande",
+      subtitle: "Renseignez vos coordonnées de livraison. Vous paierez en espèces à la réception de votre colis.",
+      summaryTitle: "Récapitulatif de votre commande",
+      modelLabel: "Modèle :",
+      colorLabel: "Teinte :",
+      sizeLabel: "Pointure choisie :",
+      sizeNotSelectedWarning: "Veuillez sélectionner une pointure ci-dessus",
+      quantityLabel: "Quantité :",
+      unitPriceLabel: "Prix unitaire :",
+      deliveryLabel: "Frais de livraison :",
+      freeDelivery: "Gratuit (0 MAD)",
+      totalLabel: "Total à régler à la livraison :",
+      fullNameLabel: "Nom et Prénom",
+      fullNamePlaceholder: "Ex : Mehdi Benjelloun",
+      phoneLabel: "Numéro de téléphone (WhatsApp)",
+      phonePlaceholder: "Ex : 06 61 23 45 67",
+      cityLabel: "Ville de livraison",
+      citySelectPrompt: "Sélectionnez votre ville",
+      cityPlaceholder: "Ex : Casablanca, Rabat, Marrakech...",
+      cityOtherOption: "Autre ville au Maroc...",
+      addressLabel: "Adresse complète de livraison",
+      addressPlaceholder: "Ex : Boulevard Zerktouni, Résidence Al Manar, Étage 3, N° 12",
+      notesLabel: "Instructions pour le livreur (optionnel)",
+      notesPlaceholder: "Ex : Livraison après 15h, me joindre par téléphone avant le passage...",
+      submitButton: "Confirmer la commande",
+      submitButtonLoading: "Enregistrement de votre commande...",
+      disclaimer: "Paiement en espèces à la livraison après avoir inspecté et essayé votre paire auprès du livreur. Aucune avance requise.",
+      processingError: "Une erreur est survenue lors de l'enregistrement de votre commande. Veuillez vérifier vos informations ou réessayer.",
+      errors: {
+        sizeRequired: "Veuillez sélectionner une pointure pour ce modèle.",
+        nameRequired: "Veuillez renseigner votre nom complet.",
+        phoneRequired: "Veuillez renseigner un numéro de téléphone valide au Maroc.",
+        cityRequired: "Veuillez sélectionner ou indiquer votre ville.",
+        addressRequired: "Veuillez indiquer votre adresse de livraison.",
+      },
+    },
+
+    // Thank You Section After Successful In-App Order Completion
+    thankYou: {
+      title: "Merci pour votre confiance !",
+      subtitle: "Nous avons bien reçu votre commande. Nous allons l'examiner et vous contacter pour confirmer les détails.",
+      orderRefLabel: "Numéro de votre commande :",
+      copyRef: "Copier la référence",
+      copied: "Copié !",
+      statusLabel: "Statut actuel :",
+      statusReceived: "Commande reçue · En cours de préparation",
+      detailsTitle: "Récapitulatif de votre achat",
+      customerTitle: "Informations de livraison",
+      customerName: "Destinataire :",
+      customerPhone: "Téléphone :",
+      customerCity: "Ville :",
+      customerAddress: "Adresse :",
+      customerNotes: "Instructions :",
+      paymentNoticeTitle: "Paiement en espèces à la livraison",
+      paymentNoticeDesc: "Conformément à nos engagements, vous ne réglez votre commande qu'après réception de votre colis et essayage de votre paire auprès du livreur.",
+      nextStepsTitle: "Prochaines étapes :",
+      nextStepsDesc: "Notre atelier prépare soigneusement votre paire. Un conseiller BIAZ Shoes vous contactera rapidement par téléphone pour confirmer l'expédition.",
+      continueShopping: "Continuer mes achats",
+      returnHome: "Retour à l'accueil",
+    },
+
+    // 3. About Us Page
+    about: {
+      pageTitle: "À propos de BIAZ Shoes",
+      pageSubtitle: "La passion du soulier masculin élégant, confectionné avec soin et pensé pour le quotidien.",
+      section1: {
+        title: "Notre vision",
+        content: "BIAZ Shoes est née de la volonté d'offrir aux hommes au Maroc des souliers en cuir alliant esthétique raffinée, matières de qualité et rapport direct sans intermédiaires inutiles. Nous croyons en une élégance intemporelle qui traverse les saisons sans perdre de sa superbe.",
+      },
+      section2: {
+        title: "Philosophie du design",
+        content: "Chaque modèle privilégie la pureté des lignes et l'harmonie des proportions. Du Richelieu formel au Mocassin estival, nous évitons les artifices superflus pour laisser s'exprimer la noblesse du cuir et la finesse du montage.",
+      },
+      section3: {
+        title: "Matières et finitions",
+        content: "Nous sélectionnons des cuirs souples et résistants qui épousent naturellement la forme du pied au fil des ports. L'assemblage des pièces, les coutures régulières et les doublures intérieures en cuir témoignent de notre exigence constante pour le confort de marche.",
+      },
+      section4: {
+        title: "Notre engagement",
+        content: "Offrir un service personnalisé et transparent. De la recommandation de pointure à la livraison chez vous, nous répondons personnellement à chacune de vos questions via WhatsApp.",
+      },
+      ctaText: "Découvrir nos créations",
+    },
+
+    // 4. Contact Us Page
+    contact: {
+      pageTitle: "Contactez BIAZ Shoes",
+      pageSubtitle: "Nous sommes à votre disposition pour toute demande d'information, conseil de pointure ou commande spéciale.",
+      whatsappCard: {
+        title: "Contact & Commandes WhatsApp",
+        desc: "Le moyen le plus simple et le plus rapide pour commander ou poser vos questions.",
+        buttonText: "Ouvrir la conversation WhatsApp",
+        number: WHATSAPP_DISPLAY,
+      },
+      phoneCard: {
+        title: "Téléphone direct",
+        number: WHATSAPP_DISPLAY,
+        hours: "Du Lundi au Samedi · 10h00 à 19h30",
+        callNow: "Appeler directement",
+      },
+      locationCard: {
+        title: "Localisation & Service",
+        city: STORE_CITY_FR,
+        note: "Service de livraison disponible dans toutes les villes du Royaume.",
+        serviceNotice: "Livraison sécurisée avec essayage à domicile dans tout le Maroc",
+      },
+      form: {
+        title: "Envoyez-nous un message",
+        subtitle: "Remplissez vos coordonnées ci-dessous pour nous écrire directement via WhatsApp.",
+        nameLabel: "Votre nom complet",
+        namePlaceholder: "Ex: Karim Bennis",
+        messageLabel: "Votre message ou question",
+        messagePlaceholder: "Ex: Bonjour, je souhaite me renseigner sur la disponibilité du modèle Le Royal en pointure 42...",
+        submitWhatsApp: "Envoyer le message sur WhatsApp",
+        directNotice: "En cliquant, une conversation pré-remplie avec votre message s'ouvrira directement sur WhatsApp avec le",
+        successNotice: "Une conversation WhatsApp s’est ouverte avec votre message. Vous pouvez y envoyer directement votre texte.",
+      },
+      socials: {
+        title: "Suivez notre univers",
+        instagram: "@biazshoes",
+        facebook: "BIAZ Shoes Maroc",
+      },
+    },
+
+    // Common Footer
+    footer: {
+      description: "BIAZ Shoes · Souliers d'exception en cuir pour homme au Maroc. Élégance intemporelle, finitions soignées et commande personnalisée via WhatsApp.",
+      navTitle: "Navigation",
+      contactTitle: "Nous contacter",
+      phone: WHATSAPP_DISPLAY,
+      city: STORE_CITY_FR,
+      allRightsReserved: "Tous droits réservés. BIAZ Shoes.",
+      madCurrency: "Prix exprimés en Dirhams marocains (MAD).",
+    },
+  },
+
+  ar: {
+    brandName: "BIAZ Shoes",
+    tagline: "أحذية جلدية رجالية فاخرة بالمغرب",
+    announcement: "توصيل متوفر لكافة مدن المغرب · استشارة المقاس والطلب المباشر عبر واتساب",
+    
+    // Exactly 4 Navigation Links
+    nav: {
+      home: "الرئيسية",
+      products: "تشكيلة الأحذية",
+      about: "من نحن",
+      contact: "اتصل بنا",
+      whatsapp: "اطلب عبر واتساب",
+      changeLang: "Français",
+    },
+
+    // 1. Home Page
+    home: {
+      hero: {
+        kicker: "BIAZ Shoes · أحذية جلدية رجالية راقية",
+        title: "فخامة الحذاء الجلدي الأصيل، بحرفية تدوم.",
+        subtitle: "تشكيلة أحذية متميزة صُممت للرجل الأنيق في المغرب. تصاميم أوكسفورد وديربي وموكاسين تجمع بين الراحة الاستثنائية وجودة الجلد الطبيعي.",
+        cta: "استكشف التشكيلة",
+        secondaryCta: "عن الدار والحرفة",
+      },
+      categoriesTitle: "أنواع الأحذية وتصاميمها",
+      categoriesSubtitle: "قصات كلاسيكية وعصرية متوازنة، تلبي متطلبات إطلالاتك الرسمية واليومية.",
+      types: {
+        oxford: {
+          name: "أوكسفورد (Oxford)",
+          desc: "الخيار الأول والأساسي للمناسبات الرسمية وحفلات الزفاف والبدلات الفاخرة.",
+        },
+        derby: {
+          name: "ديربي (Derby)",
+          desc: "برباط خارجي مريح، يجمع بين الوقار والمرونة لإطلالات العمل واليوميات.",
+        },
+        loafer: {
+          name: "موكاسين (Loafer)",
+          desc: "تصميم انسيابي سهل الارتداء يوفر خفة تامة وأناقة عصرية غير متكلفة.",
+        },
+        boot: {
+          name: "بوت الكاحل (Chelsea Boot)",
+          desc: "حضور واثق وتصميم محكم يحتضن الكاحل بثبات وأناقة دافئة.",
+        },
+      },
+      featuredTitle: "موديلات مختارة",
+      featuredSubtitle: "نخبة من الأحذية المفضلة لدى عملائنا بفضل جودة جلودها وتناسق تفاصيلها.",
+      orderWhatsapp: "اطلب عبر واتساب",
+      viewAllProducts: "عرض كامل التشكيلة",
+      craftTitle: "عناية حرفية بأدق التفاصيل",
+      craftSubtitle: "كل جزء من الحذاء مصمم بعناية ليمنحك الراحة الفورية ويرافقك لسنوات.",
+      craftItems: [
+        {
+          title: "جلد طبيعي ممتاز",
+          desc: "جلود طبيعية مختارة بعناية، تتنفس بنعومة وتكتسب بريقاً معتقاً ومميزاً بمرور الوقت.",
+        },
+        {
+          title: "خياطة دقيقة ومحكمة",
+          desc: "تجميع متقن للقطع يضمن متانة فائقة وتحملاً للاستعمال المنتظم.",
+        },
+        {
+          title: "بطانة داخلية من الجلد الطبيعي",
+          desc: "تهوية طبيعية وملمس ناعم يمنع الاحتكاك ويوفر راحة مستمرة للقدم طوال اليوم.",
+        },
+        {
+          title: "نعل مدروس وممتص للصدمات",
+          desc: "توازن هندسي بين المرونة وخفة الحركة، مع عزل وثبات على مختلف الأرضيات.",
+        },
+      ],
+      brandTeaser: {
+        title: "عن BIAZ Shoes في المغرب",
+        text: "تقدم BIAZ Shoes أحذية جلدية رجالية تجمع بين بساطة التصميم وأصالة المواد. نعتمد على جلود حقيقية وقوالب مريحة، مع تواصل شخصي مباشر مع كل عميل لنساعدك في اختيار المقاس المناسب بكل ثقة.",
+        linkText: "تعرّف على قصتنا ورؤيتنا",
+      },
+      whatsappSection: {
+        title: "هل تحتاج استشارة حول مقاسك أو موديل معين؟",
+        subtitle: "فريقنا في خدمتكم عبر واتساب لمساعدتكم في تحديد المقاس الدقيق قبل تأكيد الطلب.",
+        buttonText: "تحدث معنا عبر واتساب",
+        numberText: "متواجدون للمساعدة على الرقم",
+      },
+    },
+
+    // 2. Products Page
+    products: {
+      pageTitle: "تشكيلة الأحذية الجلدية",
+      pageSubtitle: "استكشف موديلات BIAZ المتوفرة في المغرب. اطلب حذاءك مباشرة بمحادثة سهلة وسريعة عبر واتساب.",
+      filterAll: "جميع الموديلات",
+      filterOxford: "أوكسفورد",
+      filterDerby: "ديربي",
+      filterLoafer: "موكاسين",
+      filterBoot: "بوت كاحل",
+      sortBy: "ترتيب حسب",
+      sortDefault: "الترتيب المقترح",
+      sortPriceAsc: "السعر: من الأقل للأعلى",
+      sortPriceDesc: "السعر: من الأعلى للأقل",
+      sizesLabel: "المقاسات المتاحة:",
+      colorsLabel: "اللون:",
+      mad: "د.م.",
+      orderButton: "اطلب عبر واتساب",
+      viewDetails: "تفاصيل الحذاء وإتمام الطلب",
+      directMessagePrefix: "مرحباً BIAZ Shoes، أود طلب حذاء:",
+      sizeHint: "اختر مقاسك أولاً ثم اضغط لرؤية تفاصيل الحذاء أو إتمام الطلب مباشرة عبر واتساب.",
+      noResults: "لا توجد أحذية تطابق هذا الفلتر حالياً.",
+    },
+
+    // Product Detail & Order Flow
+    productDetail: {
+      backToProducts: "العودة إلى تشكيلة الأحذية",
+      backToHome: "العودة للرئيسية",
+      inStock: "متوفر للشحن الفوري",
+      lowStock: "كمية محدودة - آخر أزواج متوفرة",
+      madeToOrder: "يُصنع حسب الطلب",
+      selectSizePrompt: "يرجى اختيار مقاس الحذاء أولاً",
+      sizeSelected: "المقاس المختار:",
+      quantity: "الكمية:",
+      freeDeliveryBadge: "توصيل مجاني وسريع لكافة مدن المغرب",
+      codBadge: "الدفع نقداً عند الاستلام بعد المعاينة والقياس",
+      exchangeBadge: "استبدال مجاني للمقاس في حال عدم الملاءمة",
+      specsTitle: "المواصفات الفنية والحرفية",
+      leatherType: "نوعية الجلد",
+      leatherOrigin: "مصدر الجلود",
+      construction: "طريقة التركيب والخياطة",
+      lining: "البطانة الداخلية",
+      sole: "النعل الخارجي",
+      lastWidth: "مقاس القالب والعرض",
+      finish: "التشطيب والتلميع اليدوي",
+      careTitle: "إرشادات العناية بالجلد وإطالة عمره",
+      betweenSizesTitle: "نصيحة المقاس من BIAZ",
+      orderCta: "أكمل الطلب الآن",
+      directOrderSubtitle: "أدخل معلومات التوصيل الخاصة بك أدناه لإتمام طلبك بكل سهولة وأمان.",
+      zoomHint: "انقر لتكبير صورة الحذاء وفحص مسام الجلد ودقة الخياطة",
+      closeZoom: "إغلاق التكبير",
+      angles: {
+        side: "جانب الحذاء الخارجي",
+        top: "أعلى الحذاء والرباط",
+        threeQuarter: "زاوية ثلاثية الأبعاد",
+        sole: "النعل الخارجي الطبيعي",
+        stitching: "دقة خياطة الإطار (Goodyear)",
+        lining: "البطانة الجلدية الناعمة",
+        scale: "مسام ولمعان الجلد الطبيعي",
+        onFoot: "مظهر الحذاء عند الارتداء",
+      },
+    },
+
+    orderForm: {
+      title: "استمارة إتمام الطلب والتوصيل",
+      subtitle: "أدخل بيانات التوصيل الخاصة بك لتأكيد طلبك. الدفع نقداً عند استلام الحذاء ومعاينته.",
+      summaryTitle: "ملخص طلبك",
+      modelLabel: "الموديل:",
+      colorLabel: "اللون:",
+      sizeLabel: "المقاس المختار:",
+      sizeNotSelectedWarning: "يرجى اختيار المقاس من الأعلى قبل إتمام الطلب",
+      quantityLabel: "الكمية:",
+      unitPriceLabel: "سعر الحذاء:",
+      deliveryLabel: "رسوم التوصيل:",
+      freeDelivery: "مجاني (0 د.م.)",
+      totalLabel: "المجموع النهائي المؤدى عند الاستلام:",
+      fullNameLabel: "الاسم الكامل",
+      fullNamePlaceholder: "مثال: المهدي بنجلون",
+      phoneLabel: "رقم الهاتف (للتواصل والتوصيل)",
+      phonePlaceholder: "مثال: 0661234567",
+      cityLabel: "مدينة التوصيل",
+      citySelectPrompt: "اختر مدينتك",
+      cityPlaceholder: "مثال: الدار البيضاء، الرباط، مراكش، طنجة...",
+      cityOtherOption: "مدينة أخرى بالمغرب...",
+      addressLabel: "عنوان التوصيل بالتفصيل",
+      addressPlaceholder: "مثال: شارع الزرقطوني، إقامة المنار، الطابق 3، شقة 12",
+      notesLabel: "ملاحظات إضافية للموزع (اختياري)",
+      notesPlaceholder: "مثال: الاتصال قبل الوصول بنصف ساعة، التوصيل بعد الساعة الرابعة عصراً...",
+      submitButton: "إكمال الطلب",
+      submitButtonLoading: "جاري تسجيل وتأكيد طلبكم...",
+      disclaimer: "الدفع نقداً بنسبة 100% عند الاستلام بعد المعاينة وتجربة المقاس براحة تامة. لا نطلب أي تسبيق مالي مسبق.",
+      processingError: "حدث خطأ أثناء تسجيل طلبكم. يرجى التأكد من البيانات والمحاولة مجدداً.",
+      errors: {
+        sizeRequired: "يرجى اختيار مقاسك قبل المتابعة.",
+        nameRequired: "يرجى كتابة الاسم الكامل.",
+        phoneRequired: "يرجى إدخال رقم هاتف صحيح للتواصل في المغرب (مثال: 0661234567).",
+        cityRequired: "يرجى تحديد مدينة التوصيل.",
+        addressRequired: "يرجى إدخال عنوان التوصيل بالتفصيل.",
+      },
+    },
+
+    // Thank You Section After Successful In-App Order Completion
+    thankYou: {
+      title: "شكرًا لثقتكم بنا!",
+      subtitle: "لقد توصلنا بطلبكم بنجاح. سنراجع طلبكم ونتواصل معكم لتأكيد التفاصيل.",
+      orderRefLabel: "رقم طلبكم:",
+      copyRef: "نسخ الرقم المرجعي",
+      copied: "تم النسخ بنجاح!",
+      statusLabel: "حالة الطلب:",
+      statusReceived: "تم استلام الطلب · قيد التجهيز والمراجعة",
+      detailsTitle: "تفاصيل الحذاء والطلب",
+      customerTitle: "بيانات المستلم وعنوان التوصيل",
+      customerName: "الاسم الكامل:",
+      customerPhone: "رقم الهاتف:",
+      customerCity: "المدينة:",
+      customerAddress: "عنوان التوصيل:",
+      customerNotes: "ملاحظات التوصيل:",
+      paymentNoticeTitle: "الدفع نقداً عند الاستلام (COD)",
+      paymentNoticeDesc: "تأكيداً على ثقتنا بجودة صناعتنا، لن تؤدي أي درهم إلا بعد وصول الموزع إليك، وفحص الحذاء وتجربة مقاسه براحة تامة.",
+      nextStepsTitle: "ما هي الخطوة التالية؟",
+      nextStepsDesc: "يقوم فريقنا الآن بمراجعة بيانات الطلب وتجهيز الصندوق والملحقات. سيتواصل معكم أحد مسؤولينا هاتفياً لتأكيد موعد وخطة التوصيل المناسبة لكم.",
+      continueShopping: "تصفح باقي التشكيلة",
+      returnHome: "العودة إلى الرئيسية",
+    },
+
+    // 3. About Us Page
+    about: {
+      pageTitle: "عن BIAZ Shoes",
+      pageSubtitle: "شغف بالأحذية الجلدية الرجالية الفاخرة، بمقاييس رفيعة مصممة لتواكب أناقة الرجل العصري.",
+      section1: {
+        title: "رؤيتنا",
+        content: "انطلقت فكرة BIAZ Shoes لتقديم أحذية جلدية للرجل في المغرب توازن بين الذوق الكلاسيكي الرفيع والخامات الموثوقة. نؤمن بأن الحذاء المتقن هو استثمار حقيقي في إطلالة الرجل الواثق، ونحرص على توفير تجربة شراء صادقة ومباشرة بدون تعقيد.",
+      },
+      section2: {
+        title: "فلسفة التصميم",
+        content: "الأناقة الحقيقية تنبع من نقاء الخطوط وبساطة التكوين. من حذاء الأوكسفورد للمناسبات الكبرى إلى موكاسين اليوميات المريح، نعتمد تصاميم متوازنة النسب تبرز فخامة الجلد الطبيعي دون بهرجة زائدة.",
+      },
+      section3: {
+        title: "جودة الخامات ودقة الصنع",
+        content: "ننتقي جلوداً طبيعية عالية الجودة تمتاز بالمرونة والقدرة على التكيف مع حركة القدم. الخياطة المنتظمة، والبطانات الجلدية المسامية، والنعال المتينة كلها تفاصيل دقيقة نحرص عليها لتمنحك راحة مشي تدوم طويلاً.",
+      },
+      section4: {
+        title: "التزامنا برضاكم",
+        content: "خدمة عملائنا ترتكز على الصدق والاهتمام بالتفاصيل. نساعدك شخصياً في اختيار المقاس الدقيق، ونوفر توصيلاً سريعاً وموثوقاً يتيح لك معاينة الحذاء والاطمئنان لجودته ومقاسه.",
+      },
+      ctaText: "استكشف تشكيلة الأحذية",
+    },
+
+    // 4. Contact Us Page
+    contact: {
+      pageTitle: "اتصل بنا - BIAZ Shoes",
+      pageSubtitle: "نسعد بالتواصل معكم للإجابة عن استفساراتكم، ومساعدتكم في اختيار المقاس، وتأكيد طلباتكم.",
+      whatsappCard: {
+        title: "الطلب والاستفسار عبر واتساب",
+        desc: "الوسيلة الأسرع والأسهل للتواصل الفوري معنا ومتابعة طلبك خطوة بخطوة.",
+        buttonText: "محادثة فورية على واتساب",
+        number: WHATSAPP_DISPLAY,
+      },
+      phoneCard: {
+        title: "الاتصال الهاتفي المباشر",
+        number: WHATSAPP_DISPLAY,
+        hours: "من الإثنين إلى السبت · من 10:00 صباحاً إلى 7:30 مساءً",
+        callNow: "اتصل بنا مباشرة",
+      },
+      locationCard: {
+        title: "المقر وخدمة التوصيل",
+        city: STORE_CITY_AR,
+        note: "خدمة التوصيل السريع متوفرة ومؤمنة لكافة مدن ومناطق المملكة.",
+        serviceNotice: "توصيل آمن مع إمكانية المعاينة والتأكد من المقاس عند الاستلام",
+      },
+      form: {
+        title: "أرسل لنا رسالة سريعة",
+        subtitle: "أدخل اسمك ورسالتك وسنقوم بفتح محادثة واتساب مباشرة مع فريقنا.",
+        nameLabel: "الاسم الكامل",
+        namePlaceholder: "مثال: المهدي بنجلون",
+        messageLabel: "رسالتك أو استفسارك (الموديل أو المقاس)",
+        messagePlaceholder: "مثال: مرحباً، أود الاستفسار عن توفر حذاء Le Royal بمقاس 42 ومدة التوصيل...",
+        submitWhatsApp: "إرسال الرسالة عبر واتساب",
+        directNotice: "عند النقر، ستُفتح محادثة واتساب تلقائياً بالرسالة المكتوبة مع الرقم",
+        successNotice: "تم فتح محادثة واتساب بنجاح، يمكنك الضغط على إرسال للتواصل معنا فوراً.",
+      },
+      socials: {
+        title: "تابعوا حساباتنا الرسمية",
+        instagram: "@biazshoes",
+        facebook: "BIAZ Shoes Maroc",
+      },
+    },
+
+    // Common Footer
+    footer: {
+      description: "BIAZ Shoes · علامة مغربية متخصصة في الأحذية الجلدية الرجالية الفاخرة. أناقة كلاسيكية وتشطيب متقن، مع خدمة تواصل وطلب مباشر عبر واتساب.",
+      navTitle: "صفحات الموقع",
+      contactTitle: "معلومات التواصل",
+      phone: WHATSAPP_DISPLAY,
+      city: STORE_CITY_AR,
+      allRightsReserved: "جميع الحقوق محفوظة. BIAZ Shoes.",
+      madCurrency: "جميع الأسعار معلنة بالدرهم المغربي (MAD).",
+    },
+  },
+};

@@ -1,0 +1,8 @@
+{
+  "name": "MAISON [NAME] - Souliers & Maroquinerie",
+  "description": "Boutique en ligne haut de gamme de souliers en cuir pour hommes au Maroc. Confiance, fabrication d'exception, essayage à domicile et paiement à la livraison.",
+  "requestFramePermissions": [],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}

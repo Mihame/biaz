@@ -1,0 +1,93 @@
+[
+  {
+    "orderId": "BZ-20261026-7492",
+    "createdAt": "2026-10-26T21:17:56.496Z",
+    "status": "new",
+    "item": {
+      "productId": "prod-02",
+      "modelName": "Le Consul",
+      "shoeTypeFr": "Derby 5 œillets à quartier ouvert",
+      "shoeTypeAr": "حذاء ديربي كلاسيكي 5 ثقوب برباط مفتوح",
+      "colorNameFr": "Cognac Patiné",
+      "colorNameAr": "كونياك معتق بلمسة طبيعية",
+      "unitPriceMAD": 1850,
+      "size": 41,
+      "quantity": 1,
+      "totalMAD": 1850
+    },
+    "pricing": {
+      "subtotalMAD": 1850,
+      "deliveryFeeMAD": 0,
+      "totalMAD": 1850,
+      "currency": "MAD"
+    },
+    "customer": {
+      "fullName": "بيان",
+      "phone": "0681515075",
+      "city": "بني ملال",
+      "address": "الاتال"
+    },
+    "language": "ar"
+  },
+  {
+    "orderId": "BZ-20261026-9783",
+    "createdAt": "2026-10-26T21:25:59.580Z",
+    "status": "new",
+    "item": {
+      "productId": "prod-03",
+      "modelName": "Le Majorelle",
+      "shoeTypeFr": "Mocassin Penny Loafer à barrette",
+      "shoeTypeAr": "موكاسين بيني لوفر كلاسيكي بحزام جلدي",
+      "colorNameFr": "Havane Brun",
+      "colorNameAr": "بني هافانا كلاسيكي",
+      "unitPriceMAD": 1750,
+      "size": 43,
+      "quantity": 2,
+      "totalMAD": 3500
+    },
+    "pricing": {
+      "subtotalMAD": 3500,
+      "deliveryFeeMAD": 0,
+      "totalMAD": 3500,
+      "currency": "MAD"
+    },
+    "customer": {
+      "fullName": "ياسين المرابط",
+      "phone": "0665123456",
+      "city": "مراكش",
+      "address": "حي جليز، شارع محمد الخامس، إقامة النخيل 4",
+      "notes": "التسليم مساء بعد الساعة الخامسة"
+    },
+    "language": "ar"
+  },
+  {
+    "orderId": "BZ-20261026-9525",
+    "createdAt": "2026-10-26T21:26:03.395Z",
+    "status": "new",
+    "item": {
+      "productId": "prod-04",
+      "modelName": "L’Hivernal",
+      "shoeTypeFr": "Bottine Chelsea à élastiques latéraux",
+      "shoeTypeAr": "بوت تشيلسي كلاسيكي بحزام مطاطي جانبي",
+      "colorNameFr": "Marron Châtaigne",
+      "colorNameAr": "بني كستنائي دافئ",
+      "unitPriceMAD": 2200,
+      "size": 44,
+      "quantity": 1,
+      "totalMAD": 2200
+    },
+    "pricing": {
+      "subtotalMAD": 2200,
+      "deliveryFeeMAD": 0,
+      "totalMAD": 2200,
+      "currency": "MAD"
+    },
+    "customer": {
+      "fullName": "Karim Alaoui",
+      "phone": "0770987654",
+      "city": "Rabat",
+      "address": "Avenue Annakhil, Hay Riad, Appt 5"
+    },
+    "language": "fr"
+  }
+]
