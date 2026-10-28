@@ -1,4 +1,4 @@
-import { Product, AddonProduct } from './types';
+import { Product, AddonProduct, ProductColorVariant } from './types';
 
 export const COMPLEMENTARY_ADDONS: AddonProduct[] = [
   {
@@ -22,7 +22,7 @@ export const COMPLEMENTARY_ADDONS: AddonProduct[] = [
 ];
 
 // Helper to construct exactly 3 curated gallery images for luxury presentation
-const createGallery = (modelSlug: string, color: string, mainImage: string) => [
+export const createGallery = (modelSlug: string, color: string, mainImage: string) => [
   {
     label: 'Vue principale',
     angle: 'side' as const,
@@ -43,6 +43,23 @@ const createGallery = (modelSlug: string, color: string, mainImage: string) => [
   },
 ];
 
+export function getProductColors(product: Product): ProductColorVariant[] {
+  if (product.colors && product.colors.length > 0) {
+    return product.colors;
+  }
+  return [
+    {
+      id: 'c-default',
+      colorNameFr: product.colorNameFr,
+      colorNameAr: product.colorNameAr,
+      colorHex: product.colorHex,
+      images: product.images,
+      availableSizes: product.availableSizes,
+      inStock: true,
+    },
+  ];
+}
+
 export const PRODUCTS: Product[] = [
   {
     id: 'prod-01',
@@ -59,6 +76,32 @@ export const PRODUCTS: Product[] = [
     isBestSeller: true,
     width: 'standard',
     images: createGallery('Le Royal', 'Noir Ébène', '/images/hero_oxford_leather_1792953837188.jpg'),
+    colors: [
+      {
+        id: 'c-noir',
+        colorNameFr: 'Noir Ébène',
+        colorNameAr: 'أسود أبنوسي',
+        colorHex: '#181716',
+        inStock: true,
+        images: createGallery('Le Royal', 'Noir Ébène', '/images/hero_oxford_leather_1792953837188.jpg'),
+      },
+      {
+        id: 'c-cognac',
+        colorNameFr: 'Cognac Patiné',
+        colorNameAr: 'بني كونياك فاخر',
+        colorHex: '#9A5B2E',
+        inStock: true,
+        images: createGallery('Le Royal', 'Cognac Patiné', '/images/biaz_oxford_cognac.jpg'),
+      },
+      {
+        id: 'c-marron',
+        colorNameFr: 'Marron Chocolat',
+        colorNameAr: 'بني داكن شوكولاتة',
+        colorHex: '#3D281E',
+        inStock: true,
+        images: createGallery('Le Royal', 'Marron Chocolat', '/images/biaz_oxford_dark_brown.jpg'),
+      },
+    ],
     availableSizes: [
       { eu: 39, cm: 24.8, status: 'in_stock' },
       { eu: 40, cm: 25.4, status: 'in_stock' },
@@ -138,7 +181,33 @@ export const PRODUCTS: Product[] = [
     priceMAD: 1850,
     isBestSeller: true,
     width: 'standard',
-    images: createGallery('Le Consul', 'Cognac Patiné', '/images/hero_oxford_leather_1792953837188.jpg'),
+    images: createGallery('Le Consul', 'Cognac Patiné', '/images/biaz_oxford_cognac.jpg'),
+    colors: [
+      {
+        id: 'c-cognac',
+        colorNameFr: 'Cognac Patiné',
+        colorNameAr: 'كونياك معتق بلمسة طبيعية',
+        colorHex: '#9A5B2E',
+        inStock: true,
+        images: createGallery('Le Consul', 'Cognac Patiné', '/images/biaz_oxford_cognac.jpg'),
+      },
+      {
+        id: 'c-noir',
+        colorNameFr: 'Noir Profond',
+        colorNameAr: 'أسود كلاسيكي فاخر',
+        colorHex: '#181716',
+        inStock: true,
+        images: createGallery('Le Consul', 'Noir Profond', '/images/hero_oxford_leather_1792953837188.jpg'),
+      },
+      {
+        id: 'c-marron',
+        colorNameFr: 'Marron Chocolat',
+        colorNameAr: 'بني داكن شوكولاتة',
+        colorHex: '#3D281E',
+        inStock: true,
+        images: createGallery('Le Consul', 'Marron Chocolat', '/images/biaz_oxford_dark_brown.jpg'),
+      },
+    ],
     availableSizes: [
       { eu: 39, cm: 24.8, status: 'in_stock' },
       { eu: 40, cm: 25.4, status: 'in_stock' },
@@ -204,7 +273,33 @@ export const PRODUCTS: Product[] = [
     priceMAD: 1750,
     isBestSeller: true,
     width: 'standard',
-    images: createGallery('Le Majorelle', 'Havane Brun', '/images/hero_oxford_leather_1792953837188.jpg'),
+    images: createGallery('Le Majorelle', 'Havane Brun', '/images/biaz_oxford_cognac.jpg'),
+    colors: [
+      {
+        id: 'c-havane',
+        colorNameFr: 'Havane Brun',
+        colorNameAr: 'بني هافانا كلاسيكي',
+        colorHex: '#4A2A18',
+        inStock: true,
+        images: createGallery('Le Majorelle', 'Havane Brun', '/images/biaz_oxford_cognac.jpg'),
+      },
+      {
+        id: 'c-noir',
+        colorNameFr: 'Noir Ébène',
+        colorNameAr: 'أسود أبنوسي فاخر',
+        colorHex: '#181716',
+        inStock: true,
+        images: createGallery('Le Majorelle', 'Noir Ébène', '/images/biaz_loafer_noir.jpg'),
+      },
+      {
+        id: 'c-marron',
+        colorNameFr: 'Marron Chocolat',
+        colorNameAr: 'بني شوكولاتة داكن',
+        colorHex: '#3D281E',
+        inStock: true,
+        images: createGallery('Le Majorelle', 'Marron Chocolat', '/images/biaz_oxford_dark_brown.jpg'),
+      },
+    ],
     availableSizes: [
       { eu: 39, cm: 24.8, status: 'in_stock' },
       { eu: 40, cm: 25.4, status: 'in_stock' },
@@ -270,7 +365,25 @@ export const PRODUCTS: Product[] = [
     priceMAD: 2200,
     isBestSeller: true,
     width: 'standard',
-    images: createGallery('L’Hivernal', 'Marron Châtaigne', '/images/hero_oxford_leather_1792953837188.jpg'),
+    images: createGallery('L’Hivernal', 'Marron Châtaigne', '/images/biaz_oxford_dark_brown.jpg'),
+    colors: [
+      {
+        id: 'c-chataigne',
+        colorNameFr: 'Marron Châtaigne',
+        colorNameAr: 'بني كستنائي دافئ',
+        colorHex: '#522A1E',
+        inStock: true,
+        images: createGallery('L’Hivernal', 'Marron Châtaigne', '/images/biaz_oxford_dark_brown.jpg'),
+      },
+      {
+        id: 'c-noir',
+        colorNameFr: 'Noir Profond',
+        colorNameAr: 'أسود فحمي فاخر',
+        colorHex: '#181716',
+        inStock: true,
+        images: createGallery('L’Hivernal', 'Noir Profond', '/images/hero_oxford_leather_1792953837188.jpg'),
+      },
+    ],
     availableSizes: [
       { eu: 39, cm: 24.8, status: 'low_stock' },
       { eu: 40, cm: 25.4, status: 'in_stock' },
@@ -335,6 +448,32 @@ export const PRODUCTS: Product[] = [
     isBestSeller: true,
     width: 'standard',
     images: createGallery('Le Président', 'Oxblood Profond', '/images/hero_oxford_leather_1792953837188.jpg'),
+    colors: [
+      {
+        id: 'c-oxblood',
+        colorNameFr: 'Oxblood Profond',
+        colorNameAr: 'عنابي داكن ملكي',
+        colorHex: '#5B1F26',
+        inStock: true,
+        images: createGallery('Le Président', 'Oxblood Profond', '/images/hero_oxford_leather_1792953837188.jpg'),
+      },
+      {
+        id: 'c-noir',
+        colorNameFr: 'Noir Ébène',
+        colorNameAr: 'أسود أبنوسي فاخر',
+        colorHex: '#181716',
+        inStock: true,
+        images: createGallery('Le Président', 'Noir Ébène', '/images/hero_oxford_leather_1792953837188.jpg'),
+      },
+      {
+        id: 'c-cognac',
+        colorNameFr: 'Cognac Patiné',
+        colorNameAr: 'بني كونياك فاخر',
+        colorHex: '#9A5B2E',
+        inStock: true,
+        images: createGallery('Le Président', 'Cognac Patiné', '/images/biaz_oxford_cognac.jpg'),
+      },
+    ],
     availableSizes: [
       { eu: 39, cm: 24.8, status: 'low_stock' },
       { eu: 40, cm: 25.4, status: 'in_stock' },
@@ -399,6 +538,32 @@ export const PRODUCTS: Product[] = [
     isBestSeller: true,
     width: 'wide',
     images: createGallery('L’Ambassadeur', 'Noir Brillant', '/images/hero_oxford_leather_1792953837188.jpg'),
+    colors: [
+      {
+        id: 'c-noir',
+        colorNameFr: 'Noir Brillant',
+        colorNameAr: 'أسود لامع أنيق',
+        colorHex: '#141414',
+        inStock: true,
+        images: createGallery('L’Ambassadeur', 'Noir Brillant', '/images/hero_oxford_leather_1792953837188.jpg'),
+      },
+      {
+        id: 'c-marron',
+        colorNameFr: 'Marron Chocolat',
+        colorNameAr: 'بني داكن شوكولاتة',
+        colorHex: '#3D281E',
+        inStock: true,
+        images: createGallery('L’Ambassadeur', 'Marron Chocolat', '/images/biaz_oxford_dark_brown.jpg'),
+      },
+      {
+        id: 'c-cognac',
+        colorNameFr: 'Cognac Patiné',
+        colorNameAr: 'بني كونياك فاخر',
+        colorHex: '#9A5B2E',
+        inStock: true,
+        images: createGallery('L’Ambassadeur', 'Cognac Patiné', '/images/biaz_oxford_cognac.jpg'),
+      },
+    ],
     availableSizes: [
       { eu: 39, cm: 24.8, status: 'in_stock' },
       { eu: 40, cm: 25.4, status: 'in_stock' },

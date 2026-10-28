@@ -9,8 +9,9 @@ export type SizeAvailability = 'in_stock' | 'low_stock' | 'made_to_order';
 
 export interface ShoeSize {
   eu: number;
-  cm: number;
+  cm?: number;
   status: SizeAvailability;
+  stock?: number;
 }
 
 export interface ProductImageAngle {
@@ -18,6 +19,16 @@ export interface ProductImageAngle {
   angle: 'side' | 'top' | 'threeQuarter' | 'sole' | 'stitching' | 'lining' | 'onFoot' | 'scale';
   url: string;
   alt: string;
+}
+
+export interface ProductColorVariant {
+  id: string;
+  colorNameFr: string;
+  colorNameAr: string;
+  colorHex: string;
+  images: ProductImageAngle[];
+  availableSizes?: ShoeSize[];
+  inStock?: boolean;
 }
 
 export interface ProductSpecs {
@@ -65,8 +76,10 @@ export interface Product {
   colorNameFr: string;
   colorNameAr: string;
   colorHex: string;
+  colors?: ProductColorVariant[];
   priceMAD: number;
   isBestSeller?: boolean;
+  isActive?: boolean;
   width: ShoeWidth;
   images: ProductImageAngle[];
   availableSizes: ShoeSize[];
@@ -122,4 +135,4 @@ export interface Order {
   status: 'pending_confirmation';
 }
 
-export type ViewState = 'home' | 'products' | 'about' | 'contact';
+export type ViewState = 'home' | 'products' | 'about' | 'contact' | 'track-order';

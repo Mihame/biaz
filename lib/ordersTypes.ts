@@ -14,6 +14,8 @@ export interface OrderItem {
   shoeTypeAr: string;
   colorNameFr: string;
   colorNameAr: string;
+  colorHex?: string;
+  colorId?: string;
   unitPriceMAD: number;
   size: number;
   quantity: number;
@@ -52,6 +54,10 @@ export interface CreateOrderInput {
   phone: string;
   city: string;
   address: string;
+  colorId?: string;
+  colorNameFr?: string;
+  colorNameAr?: string;
+  colorHex?: string;
   notes?: string;
   language?: 'ar' | 'fr';
 }

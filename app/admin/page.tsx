@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect, useMemo, useCallback, useRef } from 'react';
 import Link from 'next/link';
+import { PRODUCTS, getProductColors } from '@/data/products';
 import {
   OrderRecord,
   OrderStatus,
@@ -34,6 +35,7 @@ import {
   TrendingUp,
   Inbox,
   ShieldAlert,
+  Palette,
 } from 'lucide-react';
 
 const ADMIN_TOKEN_KEY = 'biaz_admin_session_token';
@@ -102,6 +104,7 @@ export default function AdminPage() {
   const [isDeletingId, setIsDeletingId] = useState<string | null>(null);
   const [deleteConfirmationId, setDeleteConfirmationId] = useState<string | null>(null);
   const [copiedId, setCopiedId] = useState(false);
+  const [adminTab, setAdminTab] = useState<'orders' | 'colors'>('orders');
 
   // Guard against concurrent overlapping fetches
   const isFetchingRef = useRef(false);
@@ -354,7 +357,7 @@ export default function AdminPage() {
               <Lock className="w-5 h-5" />
             </div>
             <h1 className="text-xl font-bold font-heading-arabic text-[#1E1A17]">
-              BIAZ Shoes · لوحة تحكم الإدارة
+              BIAZ · لوحة تحكم الإدارة
             </h1>
             <p className="text-xs text-[#6B635B]">
               هذه المنطقة مخصصة لإدارة ومتابعة طلبات المتجر فقط.
@@ -407,7 +410,7 @@ export default function AdminPage() {
                 href="/"
                 className="text-[11px] font-semibold text-[#6B635B] hover:text-[#9A5B2E] transition-colors inline-flex items-center gap-1"
               >
-                <span>العودة إلى متجر BIAZ Shoes</span>
+                <span>العودة إلى متجر BIAZ</span>
                 <ExternalLink className="w-3 h-3" />
               </Link>
             </div>
@@ -424,12 +427,49 @@ export default function AdminPage() {
       <header className="bg-white border-b border-[#E2DAD0] sticky top-0 z-30 shadow-2xs">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3.5 flex items-center justify-between gap-4">
           <div className="flex items-center gap-3">
-            <span className="text-lg sm:text-xl font-bold tracking-tight font-heading-arabic text-[#1E1A17]">
-              BIAZ <span className="text-[#9A5B2E]">SHOES</span>
-            </span>
+            <Link
+              href="/"
+              className="text-xl font-bold tracking-wider font-heading-arabic text-[#1E1A17] hover:text-[#9A5B2E] transition-colors"
+            >
+              BIAZ
+            </Link>
             <span className="text-xs font-semibold px-2.5 py-0.5 rounded-xs bg-[#1E1A17] text-white">
-              لوحة إدارة الطلبات
+              لوحة الإدارة
             </span>
+          </div>
+
+          {/* Section Navigation Tabs */}
+          <div className="flex items-center gap-1 bg-[#FAF8F5] p-1 rounded-xs border border-[#E2DAD0]">
+            <button
+              type="button"
+              onClick={() => setAdminTab('orders')}
+              className={`text-xs px-3 py-1.5 rounded-xs font-bold transition-colors cursor-pointer flex items-center gap-1.5 ${
+                adminTab === 'orders'
+                  ? 'bg-[#1E1A17] text-white shadow-2xs'
+                  : 'text-[#6B635B] hover:text-[#1E1A17]'
+              }`}
+            >
+              <span>إدارة الطلبات</span>
+              <span
+                className={`text-[10px] px-1.5 py-0.2 rounded-full font-mono ${
+                  adminTab === 'orders' ? 'bg-white/20 text-white' : 'bg-[#E2DAD0] text-[#1E1A17]'
+                }`}
+              >
+                {orders.length}
+              </span>
+            </button>
+            <button
+              type="button"
+              onClick={() => setAdminTab('colors')}
+              className={`text-xs px-3 py-1.5 rounded-xs font-bold transition-colors cursor-pointer flex items-center gap-1.5 ${
+                adminTab === 'colors'
+                  ? 'bg-[#1E1A17] text-white shadow-2xs'
+                  : 'text-[#6B635B] hover:text-[#1E1A17]'
+              }`}
+            >
+              <Palette className="w-3.5 h-3.5" />
+              <span>ألوان الأحذية والمخزون</span>
+            </button>
           </div>
 
           <div className="flex items-center gap-2 sm:gap-3">
@@ -479,7 +519,9 @@ export default function AdminPage() {
 
       {/* 2. Main Content Container */}
       <main className="flex-1 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8 space-y-6 w-full">
-        {/* Statistics Cards */}
+        {adminTab === 'orders' ? (
+          <>
+            {/* Statistics Cards */}
         {stats && (
           <div className="grid grid-cols-2 lg:grid-cols-5 gap-3 sm:gap-4">
             {/* Total Orders */}
@@ -745,6 +787,15 @@ export default function AdminPage() {
                           <span className="text-[11px] text-[#6B635B] block">
                             المقاس: <strong>{order.item.size}</strong> · الكمية: <strong>{order.item.quantity}</strong>
                           </span>
+                          {(order.item.colorNameAr || order.item.colorNameFr) && (
+                            <div className="flex items-center gap-1.5 mt-1 text-[11px] text-[#1E1A17] font-medium">
+                              <span
+                                className="w-2.5 h-2.5 rounded-full border border-black/20 shrink-0"
+                                style={{ backgroundColor: order.item.colorHex || '#1E1A17' }}
+                              />
+                              <span>اللون: <strong>{order.item.colorNameAr || order.item.colorNameFr}</strong></span>
+                            </div>
+                          )}
                         </td>
 
                         <td className="py-3.5 px-4">
@@ -843,6 +894,15 @@ export default function AdminPage() {
                       <p className="font-semibold text-[#1E1A17]">
                         {order.item.modelName} (مقاس {order.item.size} · كمية {order.item.quantity})
                       </p>
+                      {(order.item.colorNameAr || order.item.colorNameFr) && (
+                        <div className="flex items-center gap-1.5 text-xs text-[#1E1A17] font-medium">
+                          <span
+                            className="w-2.5 h-2.5 rounded-full border border-black/20 shrink-0"
+                            style={{ backgroundColor: order.item.colorHex || '#1E1A17' }}
+                          />
+                          <span>اللون: <strong>{order.item.colorNameAr || order.item.colorNameFr}</strong></span>
+                        </div>
+                      )}
                       <p className="font-bold text-[#9A5B2E] font-mono text-sm">
                         المجموع: {order.pricing.totalMAD.toLocaleString()} د.م.
                       </p>
@@ -878,6 +938,141 @@ export default function AdminPage() {
                           <Trash2 className="w-4 h-4" />
                         </button>
                       </div>
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+        )}
+          </>
+        ) : (
+          /* Product Colors & Stock Catalog View */
+          <div className="space-y-6">
+            <div className="bg-white p-5 rounded-sm border border-[#E2DAD0] shadow-2xs space-y-2">
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+                <div>
+                  <h2 className="text-base sm:text-lg font-bold text-[#1E1A17] flex items-center gap-2">
+                    <Palette className="w-5 h-5 text-[#9A5B2E]" />
+                    <span>كتالوج ألوان وموديلات أحذية BIAZ</span>
+                  </h2>
+                  <p className="text-xs text-[#6B635B] mt-0.5">
+                    معاينة شاملة لجميع الألوان المتوفرة لكل حذاء، الصور الحقيقية المصغرة لكل لون، ودرجات الجلود المعتمدة في المتجر.
+                  </p>
+                </div>
+                <div className="text-xs font-semibold px-3 py-1.5 rounded-xs bg-[#FAF8F5] border border-[#E2DAD0] text-[#1E1A17] shrink-0">
+                  إجمالي الموديلات: <strong>{PRODUCTS.length}</strong> أحذية
+                </div>
+              </div>
+            </div>
+
+            {/* Shoes Grid */}
+            <div className="space-y-6">
+              {PRODUCTS.map((prod) => {
+                const colors = getProductColors(prod);
+                return (
+                  <div
+                    key={prod.id}
+                    className="bg-white rounded-sm border border-[#E2DAD0] shadow-2xs overflow-hidden"
+                  >
+                    {/* Header of Shoe */}
+                    <div className="p-4 sm:p-5 bg-[#FAF8F5] border-b border-[#E2DAD0] flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+                      <div>
+                        <div className="flex items-center gap-2">
+                          <h3 className="text-base font-bold text-[#1E1A17]">{prod.modelName}</h3>
+                          <span className="text-xs font-bold text-[#9A5B2E] font-mono">
+                            {prod.priceMAD.toLocaleString()} د.م.
+                          </span>
+                        </div>
+                        <p className="text-xs text-[#6B635B] mt-0.5">
+                          {prod.shoeTypeAr} · {prod.shoeTypeFr}
+                        </p>
+                      </div>
+
+                      <div className="flex items-center gap-2">
+                        <span className="text-xs font-semibold px-2.5 py-1 rounded-xs bg-white border border-[#E2DAD0] text-[#1E1A17]">
+                          {colors.length} {colors.length === 2 ? 'لونان' : colors.length > 2 ? 'ألوان' : 'لون'}
+                        </span>
+                        <Link
+                          href="/"
+                          className="text-xs font-bold px-3 py-1 rounded-xs bg-[#1E1A17] text-white hover:bg-[#9A5B2E] transition-colors flex items-center gap-1"
+                        >
+                          <span>معاينة في المتجر</span>
+                          <ExternalLink className="w-3 h-3" />
+                        </Link>
+                      </div>
+                    </div>
+
+                    {/* Color Variants List */}
+                    <div className="p-4 sm:p-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                      {colors.map((c) => (
+                        <div
+                          key={c.id}
+                          className="p-3.5 rounded-xs border border-[#E2DAD0] bg-white space-y-3 hover:border-[#9A5B2E]/60 transition-colors"
+                        >
+                          {/* Color Header */}
+                          <div className="flex items-center justify-between gap-2">
+                            <div className="flex items-center gap-2 min-w-0">
+                              <span
+                                className="w-4 h-4 rounded-full border border-black/20 shrink-0 shadow-2xs"
+                                style={{ backgroundColor: c.colorHex }}
+                              />
+                              <div className="min-w-0">
+                                <span className="text-xs font-bold text-[#1E1A17] block truncate">
+                                  {c.colorNameAr}
+                                </span>
+                                <span className="text-[10px] text-[#6B635B] block truncate" dir="ltr">
+                                  {c.colorNameFr}
+                                </span>
+                              </div>
+                            </div>
+
+                            <span className="text-[10px] font-mono px-2 py-0.5 bg-[#FAF8F5] rounded border border-[#E2DAD0] text-[#6B635B]">
+                              {c.colorHex}
+                            </span>
+                          </div>
+
+                          {/* Authentic Shoe Photo Preview */}
+                          <div className="space-y-1.5">
+                            <div className="aspect-[4/3] rounded-xs overflow-hidden bg-[#F7F5F0] border border-[#E2DAD0]">
+                              <img
+                                src={c.images?.[0]?.url || prod.images?.[0]?.url}
+                                alt={c.colorNameAr}
+                                className="w-full h-full object-cover"
+                              />
+                            </div>
+
+                            {/* Micro Photos Preview */}
+                            {c.images && c.images.length > 1 && (
+                              <div className="grid grid-cols-3 gap-1.5">
+                                {c.images.slice(0, 3).map((img, i) => (
+                                  <div
+                                    key={i}
+                                    className="aspect-[4/3] rounded-xs overflow-hidden bg-[#F7F5F0] border border-[#E2DAD0]/60"
+                                  >
+                                    <img
+                                      src={img.url}
+                                      alt=""
+                                      className="w-full h-full object-cover"
+                                    />
+                                  </div>
+                                ))}
+                              </div>
+                            )}
+                          </div>
+
+                          {/* Status and info */}
+                          <div className="pt-2 border-t border-[#E2DAD0]/60 flex items-center justify-between text-[11px]">
+                            <span className="text-emerald-700 font-bold flex items-center gap-1">
+                              <CheckCircle2 className="w-3.5 h-3.5" />
+                              <span>متوفر في المتجر</span>
+                            </span>
+                            <span className="text-[#6B635B]">
+                              {c.images?.length || 1} صور حقيقية
+                            </span>
+                          </div>
+                        </div>
+                      ))}
                     </div>
                   </div>
                 );
@@ -1023,8 +1218,20 @@ export default function AdminPage() {
                   <div>
                     <h4 className="font-bold text-sm text-[#1E1A17]">{selectedOrder.item.modelName}</h4>
                     <p className="text-[#6B635B] text-xs">
-                      {selectedOrder.item.shoeTypeAr} · {selectedOrder.item.colorNameAr}
+                      {selectedOrder.item.shoeTypeAr}
                     </p>
+                    {(selectedOrder.item.colorNameAr || selectedOrder.item.colorNameFr) && (
+                      <div className="flex items-center gap-1.5 mt-1 text-xs">
+                        <span className="text-[#6B635B]">اللون:</span>
+                        <span
+                          className="w-3 h-3 rounded-full border border-black/20 shrink-0"
+                          style={{ backgroundColor: selectedOrder.item.colorHex || '#1E1A17' }}
+                        />
+                        <strong className="text-[#1E1A17]">
+                          {selectedOrder.item.colorNameAr || selectedOrder.item.colorNameFr}
+                        </strong>
+                      </div>
+                    )}
                   </div>
                   <span className="font-mono font-bold text-sm text-[#1E1A17]">
                     {selectedOrder.item.unitPriceMAD.toLocaleString()} د.م.

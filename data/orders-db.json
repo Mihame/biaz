@@ -89,5 +89,37 @@
       "address": "Avenue Annakhil, Hay Riad, Appt 5"
     },
     "language": "fr"
+  },
+  {
+    "orderId": "BZ-20261028-8798",
+    "createdAt": "2026-10-28T18:31:43.721Z",
+    "status": "new",
+    "item": {
+      "productId": "prod-01",
+      "modelName": "Le Royal",
+      "shoeTypeFr": "Richelieu Oxford à bout droit",
+      "shoeTypeAr": "أوكسفورد كلاسيكي ريشيليو برأس مستقيم",
+      "colorNameFr": "Cognac Patiné",
+      "colorNameAr": "بني كونياك فاخر",
+      "colorHex": "#9A5B2E",
+      "colorId": "c-cognac",
+      "unitPriceMAD": 1950,
+      "size": 42,
+      "quantity": 1,
+      "totalMAD": 1950
+    },
+    "pricing": {
+      "subtotalMAD": 1950,
+      "deliveryFeeMAD": 0,
+      "totalMAD": 1950,
+      "currency": "MAD"
+    },
+    "customer": {
+      "fullName": "Test Customer",
+      "phone": "0612345678",
+      "city": "الدار البيضاء",
+      "address": "123 Boulevard Anfa"
+    },
+    "language": "ar"
   }
 ]

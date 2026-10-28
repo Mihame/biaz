@@ -1,8 +1,9 @@
 'use client';
 
-import React, { createContext, useContext, useState, useEffect } from 'react';
-import { Language, Direction, ViewState } from '@/data/types';
+import React, { createContext, useContext, useState, useEffect, useCallback } from 'react';
+import { Language, Direction, ViewState, Product } from '@/data/types';
 import { TRANSLATIONS, WHATSAPP_PHONE } from '@/data/translations';
+import { PRODUCTS } from '@/data/products';
 
 interface ShopContextType {
   language: Language;
@@ -15,6 +16,8 @@ interface ShopContextType {
   selectedProductId: string | null;
   openProductDetail: (productId: string) => void;
   closeProductDetail: () => void;
+  products: Product[];
+  refreshProducts: () => Promise<void>;
   t: typeof TRANSLATIONS.fr;
   openWhatsApp: (customMessage?: string) => void;
   openWhatsAppForProduct: (productName: string, priceMAD: number, selectedSize?: number) => void;
@@ -22,12 +25,37 @@ interface ShopContextType {
 
 const ShopContext = createContext<ShopContextType | undefined>(undefined);
 
-export function ShopProvider({ children }: { children: React.ReactNode }) {
+export function ShopProvider({
+  children,
+  initialView = 'home',
+}: {
+  children: React.ReactNode;
+  initialView?: ViewState;
+}) {
   const [language, setLanguageState] = useState<Language>('fr');
   const [direction, setDirection] = useState<Direction>('ltr');
-  const [view, setView] = useState<ViewState>('home');
+  const [view, setView] = useState<ViewState>(initialView);
   const [selectedStyleFilter, setSelectedStyleFilter] = useState<string | null>(null);
   const [selectedProductId, setSelectedProductId] = useState<string | null>(null);
+  const [products, setProducts] = useState<Product[]>(PRODUCTS);
+
+  const refreshProducts = useCallback(async () => {
+    try {
+      const res = await fetch('/api/products');
+      if (res.ok) {
+        const data = await res.json();
+        if (data.success && Array.isArray(data.products) && data.products.length > 0) {
+          setProducts(data.products);
+        }
+      }
+    } catch (err) {
+      console.warn('[ShopContext] Error fetching products:', err);
+    }
+  }, []);
+
+  useEffect(() => {
+    refreshProducts();
+  }, [refreshProducts]);
 
   // Synchronize language and HTML attributes
   const setLanguage = (lang: Language) => {
@@ -111,6 +139,8 @@ export function ShopProvider({ children }: { children: React.ReactNode }) {
         selectedProductId,
         openProductDetail,
         closeProductDetail,
+        products,
+        refreshProducts,
         t,
         openWhatsApp,
         openWhatsAppForProduct,

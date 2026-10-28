@@ -9,6 +9,7 @@ import ProductsPage from './ProductsPage';
 import AboutPage from './AboutPage';
 import ContactPage from './ContactPage';
 import ProductDetailPage from './ProductDetailPage';
+import TrackOrderPage from './TrackOrderPage';
 
 export default function StorefrontApp() {
   const { view, selectedProductId, closeProductDetail } = useShop();
@@ -16,10 +17,10 @@ export default function StorefrontApp() {
   return (
     <div className="min-h-screen flex flex-col bg-[#FAF8F5] text-[#1E1A17] selection:bg-[#9A5B2E]/20">
       
-      {/* Global Navigation Header with exactly 4 primary links */}
+      {/* Global Navigation Header with BIAZ branding */}
       <Header />
 
-      {/* Main Views (4 primary pages + dynamic product detail view without extra nav links) */}
+      {/* Main Views */}
       <main className="flex-1">
         {selectedProductId ? (
           <ProductDetailPage productId={selectedProductId} onBack={closeProductDetail} />
@@ -29,6 +30,7 @@ export default function StorefrontApp() {
             {view === 'products' && <ProductsPage />}
             {view === 'about' && <AboutPage />}
             {view === 'contact' && <ContactPage />}
+            {view === 'track-order' && <TrackOrderPage />}
           </>
         )}
       </main>

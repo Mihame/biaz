@@ -7,7 +7,7 @@ import { MessageCircle, Phone, MapPin, Lock } from 'lucide-react';
 import { WHATSAPP_DISPLAY, STORE_CITY } from '@/data/translations';
 
 export default function Footer() {
-  const { t, navigateTo, openWhatsApp } = useShop();
+  const { t, navigateTo, language, setLanguage } = useShop();
 
   return (
     <footer className="bg-[#181412] text-[#FAF8F5] border-t border-[#2C241E] pt-12 pb-10 transition-colors">
@@ -20,11 +20,11 @@ export default function Footer() {
             <div className="flex items-center gap-2.5">
               <img
                 src="/assets/aistudio/favicon_147b139c.png"
-                alt="BIAZ Shoes"
+                alt="BIAZ"
                 className="w-7 h-7 object-contain drop-shadow-xs"
               />
               <span className="font-heading-latin rtl:font-heading-arabic text-xl font-bold tracking-wider uppercase text-white">
-                {t.brandName}
+                BIAZ
               </span>
             </div>
             <p className="text-xs sm:text-sm text-[#FAF8F5]/70 leading-relaxed max-w-sm">
@@ -32,7 +32,7 @@ export default function Footer() {
             </p>
           </div>
 
-          {/* Column 2: Exact 4 Nav Links */}
+          {/* Column 2: Nav Links */}
           <div className="md:col-span-3 space-y-3">
             <h3 className="text-xs font-semibold uppercase tracking-widest rtl:tracking-normal text-[#C48A58]">
               {t.footer.navTitle}
@@ -56,6 +56,14 @@ export default function Footer() {
               </li>
               <li>
                 <button
+                  onClick={() => navigateTo('track-order')}
+                  className="hover:text-white transition-colors cursor-pointer text-[#C48A58] font-medium"
+                >
+                  {t.nav.trackOrder}
+                </button>
+              </li>
+              <li>
+                <button
                   onClick={() => navigateTo('about')}
                   className="hover:text-white transition-colors cursor-pointer"
                 >
@@ -73,21 +81,12 @@ export default function Footer() {
             </ul>
           </div>
 
-          {/* Column 3: Contact & WhatsApp */}
-          <div className="md:col-span-4 space-y-3">
+          {/* Column 3: Contact & Language */}
+          <div className="md:col-span-4 space-y-4">
             <h3 className="text-xs font-semibold uppercase tracking-widest rtl:tracking-normal text-[#C48A58]">
               {t.footer.contactTitle}
             </h3>
             <ul className="space-y-2.5 text-xs text-[#FAF8F5]/80">
-              <li>
-                <button
-                  onClick={() => openWhatsApp()}
-                  className="inline-flex items-center gap-2 hover:text-[#25D366] transition-colors cursor-pointer"
-                >
-                  <MessageCircle className="w-4 h-4 text-[#25D366] shrink-0" />
-                  <span>WhatsApp : <span dir="ltr" className="inline-block font-sans">{WHATSAPP_DISPLAY}</span></span>
-                </button>
-              </li>
               <li className="flex items-center gap-2">
                 <Phone className="w-4 h-4 text-[#C48A58] shrink-0" />
                 <span dir="ltr" className="inline-block font-sans">{t.footer.phone}</span>
@@ -97,6 +96,17 @@ export default function Footer() {
                 <span>{t.footer.city}</span>
               </li>
             </ul>
+
+            {/* Language toggle in footer */}
+            <div className="pt-2">
+              <button
+                type="button"
+                onClick={() => setLanguage(language === 'fr' ? 'ar' : 'fr')}
+                className="inline-flex items-center gap-2 text-xs text-[#FAF8F5]/80 hover:text-white px-3 py-1.5 rounded-xs border border-[#2C241E] bg-[#221B16] hover:bg-[#2C241E] transition-colors cursor-pointer"
+              >
+                <span>{language === 'fr' ? 'العربية' : 'Français (FR)'}</span>
+              </button>
+            </div>
           </div>
 
         </div>

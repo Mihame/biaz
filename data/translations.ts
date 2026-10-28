@@ -1,4 +1,4 @@
-export const BRAND_NAME = "BIAZ Shoes";
+export const BRAND_NAME = "BIAZ";
 export const WHATSAPP_PHONE = "+212665662572";
 export const WHATSAPP_DISPLAY = "+212 665-662572";
 export const STORE_CITY_FR = "Casablanca, Maroc";
@@ -9,24 +9,25 @@ export const TRANSLATIONS = {
   fr: {
     brandName: BRAND_NAME,
     tagline: "Souliers en cuir pour homme au Maroc",
-    announcement: "Livraison disponible partout au Maroc · Conseil et commande directe via WhatsApp au +212 665-662572",
+    announcement: "Livraison disponible partout au Maroc · Essayage à domicile & Paiement à la livraison",
     
-    // Exactly 4 Navigation Links
+    // Navigation Links
     nav: {
       home: "Accueil",
       products: "Produits",
       about: "À propos",
       contact: "Contact",
-      whatsapp: "Commander sur WhatsApp",
+      trackOrder: "Suivre ma commande",
+      whatsapp: "Commander",
       changeLang: "العربية",
     },
 
     // 1. Home Page
     home: {
       hero: {
-        kicker: "BIAZ Shoes · Souliers en cuir masculin",
-        title: "L'élégance intemporelle du soulier en cuir.",
-        subtitle: "Des modèles raffinés confectionnés pour l'homme contemporain au Maroc. Richelieus, Derbies et Mocassins conçus pour allier confort, style et durabilité.",
+        kicker: "BIAZ · Souliers en cuir masculin",
+        title: "L'élégance se révèle dans les détails.",
+        subtitle: "Des souliers d'exception alliant raffinement classique et confort absolu, confectionnés avec rigueur au Maroc.",
         cta: "Découvrir la collection",
         secondaryCta: "Notre démarche",
       },
@@ -52,7 +53,7 @@ export const TRANSLATIONS = {
       },
       featuredTitle: "Modèles à l'honneur",
       featuredSubtitle: "Une sélection de souliers appréciés pour leur tenue et leurs finitions.",
-      orderWhatsapp: "Commander via WhatsApp",
+      orderWhatsapp: "Commander",
       viewAllProducts: "Voir toute la collection",
       craftTitle: "L'attention aux détails",
       craftSubtitle: "Chaque élément compte pour assurer la longévité de votre paire.",
@@ -75,14 +76,14 @@ export const TRANSLATIONS = {
         },
       ],
       brandTeaser: {
-        title: "BIAZ Shoes au Maroc",
-        text: "BIAZ Shoes propose une collection de souliers en cuir pour les hommes soucieux d'élégance et de sobriété. Nous privilégions des coupes équilibrées, des matériaux éprouvés et une relation directe avec chaque client.",
+        title: "BIAZ au Maroc",
+        text: "BIAZ propose une collection de souliers en cuir pour les hommes soucieux d'élégance et de sobriété. Nous privilégions des coupes équilibrées, des matériaux éprouvés et une relation directe avec chaque client.",
         linkText: "En savoir plus sur notre histoire",
       },
       whatsappSection: {
         title: "Un conseil sur votre pointure ou votre modèle ?",
-        subtitle: "Notre équipe est à votre écoute sur WhatsApp pour vous guider avant votre commande.",
-        buttonText: "Échanger sur WhatsApp",
+        subtitle: "Notre équipe est à votre écoute pour vous guider avant votre commande.",
+        buttonText: "Nous contacter",
         numberText: "Disponible au",
       },
     },
@@ -90,7 +91,7 @@ export const TRANSLATIONS = {
     // 2. Products Page
     products: {
       pageTitle: "Collection de souliers",
-      pageSubtitle: "Découvrez nos modèles disponibles au Maroc. Commandez directement en échangeant avec nous sur WhatsApp.",
+      pageSubtitle: "Découvrez nos modèles disponibles au Maroc. Commandez en toute simplicité avec essayage à domicile et paiement à la livraison.",
       filterAll: "Tous les modèles",
       filterOxford: "Richelieus",
       filterDerby: "Derbies",
@@ -103,10 +104,10 @@ export const TRANSLATIONS = {
       sizesLabel: "Pointures :",
       colorsLabel: "Teinte :",
       mad: "MAD",
-      orderButton: "Commander via WhatsApp",
-      viewDetails: "Voir les détails & Commander",
-      directMessagePrefix: "Bonjour BIAZ Shoes, je souhaite commander le modèle :",
-      sizeHint: "Sélectionnez votre pointure puis cliquez pour voir les détails ou commander directement via WhatsApp.",
+      orderButton: "Commander",
+      viewDetails: "Commander",
+      directMessagePrefix: "Bonjour BIAZ, je souhaite commander le modèle :",
+      sizeHint: "Sélectionnez votre couleur et votre pointure puis cliquez sur Commander.",
       noResults: "Aucun soulier ne correspond à ce filtre actuellement.",
     },
 
@@ -133,7 +134,7 @@ export const TRANSLATIONS = {
       finish: "Finitions & Cirage",
       careTitle: "Guide d'entretien du soulier",
       betweenSizesTitle: "Conseil pointure BIAZ",
-      orderCta: "Passer commande maintenant",
+      orderCta: "Commander",
       directOrderSubtitle: "Remplissez le formulaire ci-dessous pour finaliser votre commande en toute simplicité.",
       zoomHint: "Cliquez pour agrandir les détails du cuir et des coutures",
       closeZoom: "Fermer l'agrandissement",
@@ -206,18 +207,18 @@ export const TRANSLATIONS = {
       paymentNoticeTitle: "Paiement en espèces à la livraison",
       paymentNoticeDesc: "Conformément à nos engagements, vous ne réglez votre commande qu'après réception de votre colis et essayage de votre paire auprès du livreur.",
       nextStepsTitle: "Prochaines étapes :",
-      nextStepsDesc: "Notre atelier prépare soigneusement votre paire. Un conseiller BIAZ Shoes vous contactera rapidement par téléphone pour confirmer l'expédition.",
+      nextStepsDesc: "Notre atelier prépare soigneusement votre paire. Un conseiller BIAZ vous contactera rapidement par téléphone pour confirmer l'expédition.",
       continueShopping: "Continuer mes achats",
       returnHome: "Retour à l'accueil",
     },
 
     // 3. About Us Page
     about: {
-      pageTitle: "À propos de BIAZ Shoes",
+      pageTitle: "À propos de BIAZ",
       pageSubtitle: "La passion du soulier masculin élégant, confectionné avec soin et pensé pour le quotidien.",
       section1: {
         title: "Notre vision",
-        content: "BIAZ Shoes est née de la volonté d'offrir aux hommes au Maroc des souliers en cuir alliant esthétique raffinée, matières de qualité et rapport direct sans intermédiaires inutiles. Nous croyons en une élégance intemporelle qui traverse les saisons sans perdre de sa superbe.",
+        content: "BIAZ est née de la volonté d'offrir aux hommes au Maroc des souliers en cuir alliant esthétique raffinée, matières de qualité et rapport direct sans intermédiaires inutiles. Nous croyons en une élégance intemporelle qui traverse les saisons sans perdre de sa superbe.",
       },
       section2: {
         title: "Philosophie du design",
@@ -236,7 +237,7 @@ export const TRANSLATIONS = {
 
     // 4. Contact Us Page
     contact: {
-      pageTitle: "Contactez BIAZ Shoes",
+      pageTitle: "Contactez BIAZ",
       pageSubtitle: "Nous sommes à votre disposition pour toute demande d'information, conseil de pointure ou commande spéciale.",
       whatsappCard: {
         title: "Contact & Commandes WhatsApp",
@@ -270,44 +271,79 @@ export const TRANSLATIONS = {
       socials: {
         title: "Suivez notre univers",
         instagram: "@biazshoes",
-        facebook: "BIAZ Shoes Maroc",
+        facebook: "BIAZ Maroc",
       },
+    },
+
+    // 5. Track Order Page
+    track: {
+      pageTitle: "Suivre ma commande",
+      pageSubtitle: "Saisissez votre numéro de commande et le numéro de téléphone associé pour consulter son statut.",
+      orderIdLabel: "Numéro de commande",
+      orderIdPlaceholder: "Ex: BZ-20261028-4821",
+      phoneLabel: "Numéro de téléphone associé",
+      phonePlaceholder: "Ex: 06 12 34 56 78",
+      submitBtn: "Suivre ma commande",
+      submittingBtn: "Recherche en cours...",
+      resultTitle: "Détails de votre commande",
+      statusLabel: "Statut actuel de la commande",
+      orderDateLabel: "Date de passation",
+      cityLabel: "Ville de destination",
+      customerLabel: "Destinataire",
+      itemTitle: "Soulier commandé",
+      sizeLabel: "Pointure",
+      colorLabel: "Couleur",
+      qtyLabel: "Quantité",
+      priceLabel: "Prix unitaire",
+      totalLabel: "Total à régler à la livraison",
+      freeDeliveryBadge: "Livraison & Essayage à domicile",
+      helpText: "Besoin de modifier votre adresse ou d'ajuster votre pointure avant l'expédition ? Notre équipe est à votre disposition.",
+      notFoundError: "Aucune commande ne correspond aux informations saisies. Veuillez vérifier votre numéro de commande et votre numéro de téléphone.",
+      step1: "Commande reçue",
+      step2: "Confirmée",
+      step3: "En préparation",
+      step4: "En cours de livraison",
+      step5: "Livrée avec succès",
+      stepCancelled: "Commande annulée",
+      backHome: "Retour à l'accueil",
+      exploreMore: "Découvrir d'autres modèles",
     },
 
     // Common Footer
     footer: {
-      description: "BIAZ Shoes · Souliers d'exception en cuir pour homme au Maroc. Élégance intemporelle, finitions soignées et commande personnalisée via WhatsApp.",
+      description: "BIAZ · Souliers d'exception en cuir pour homme au Maroc. Élégance intemporelle, finitions soignées, essayage à domicile et paiement à la livraison.",
       navTitle: "Navigation",
       contactTitle: "Nous contacter",
       phone: WHATSAPP_DISPLAY,
       city: STORE_CITY_FR,
-      allRightsReserved: "Tous droits réservés. BIAZ Shoes.",
+      allRightsReserved: "Tous droits réservés. BIAZ.",
       madCurrency: "Prix exprimés en Dirhams marocains (MAD).",
     },
   },
 
   ar: {
-    brandName: "BIAZ Shoes",
+    brandName: "BIAZ",
     tagline: "أحذية جلدية رجالية فاخرة بالمغرب",
-    announcement: "توصيل متوفر لكافة مدن المغرب · استشارة المقاس والطلب المباشر عبر واتساب",
+    announcement: "توصيل متوفر لكافة مدن المغرب · قياس منزلي ودفع عند الاستلام",
     
-    // Exactly 4 Navigation Links
+    // Navigation Links
     nav: {
       home: "الرئيسية",
       products: "تشكيلة الأحذية",
       about: "من نحن",
       contact: "اتصل بنا",
-      whatsapp: "اطلب عبر واتساب",
-      changeLang: "Français",
+      trackOrder: "تتبع الطلب",
+      whatsapp: "اطلب الآن",
+      changeLang: "FR",
     },
 
     // 1. Home Page
     home: {
       hero: {
-        kicker: "BIAZ Shoes · أحذية جلدية رجالية راقية",
-        title: "فخامة الحذاء الجلدي الأصيل، بحرفية تدوم.",
-        subtitle: "تشكيلة أحذية متميزة صُممت للرجل الأنيق في المغرب. تصاميم أوكسفورد وديربي وموكاسين تجمع بين الراحة الاستثنائية وجودة الجلد الطبيعي.",
-        cta: "استكشف التشكيلة",
+        kicker: "BIAZ · أحذية جلدية رجالية فاخرة بالمغرب",
+        title: "أناقة تبدأ من التفاصيل",
+        subtitle: "صناعة أحذية جلدية تجمع بين الفخامة الكلاسيكية وراحة المشي، مصممة بعناية للرجل الأنيق في المغرب.",
+        cta: "اكتشف المجموعة",
         secondaryCta: "عن الدار والحرفة",
       },
       categoriesTitle: "أنواع الأحذية وتصاميمها",
@@ -332,7 +368,7 @@ export const TRANSLATIONS = {
       },
       featuredTitle: "موديلات مختارة",
       featuredSubtitle: "نخبة من الأحذية المفضلة لدى عملائنا بفضل جودة جلودها وتناسق تفاصيلها.",
-      orderWhatsapp: "اطلب عبر واتساب",
+      orderWhatsapp: "اطلب الآن",
       viewAllProducts: "عرض كامل التشكيلة",
       craftTitle: "عناية حرفية بأدق التفاصيل",
       craftSubtitle: "كل جزء من الحذاء مصمم بعناية ليمنحك الراحة الفورية ويرافقك لسنوات.",
@@ -355,14 +391,14 @@ export const TRANSLATIONS = {
         },
       ],
       brandTeaser: {
-        title: "عن BIAZ Shoes في المغرب",
-        text: "تقدم BIAZ Shoes أحذية جلدية رجالية تجمع بين بساطة التصميم وأصالة المواد. نعتمد على جلود حقيقية وقوالب مريحة، مع تواصل شخصي مباشر مع كل عميل لنساعدك في اختيار المقاس المناسب بكل ثقة.",
+        title: "عن BIAZ في المغرب",
+        text: "تقدم BIAZ أحذية جلدية رجالية تجمع بين بساطة التصميم وأصالة المواد. نعتمد على جلود حقيقية وقوالب مريحة، مع توصيل سريع وإمكانية القياس في المنزل قبل الدفع.",
         linkText: "تعرّف على قصتنا ورؤيتنا",
       },
       whatsappSection: {
         title: "هل تحتاج استشارة حول مقاسك أو موديل معين؟",
-        subtitle: "فريقنا في خدمتكم عبر واتساب لمساعدتكم في تحديد المقاس الدقيق قبل تأكيد الطلب.",
-        buttonText: "تحدث معنا عبر واتساب",
+        subtitle: "فريقنا في خدمتكم لمساعدتكم في تحديد المقاس الدقيق قبل تأكيد الطلب.",
+        buttonText: "اتصل بنا",
         numberText: "متواجدون للمساعدة على الرقم",
       },
     },
@@ -370,7 +406,7 @@ export const TRANSLATIONS = {
     // 2. Products Page
     products: {
       pageTitle: "تشكيلة الأحذية الجلدية",
-      pageSubtitle: "استكشف موديلات BIAZ المتوفرة في المغرب. اطلب حذاءك مباشرة بمحادثة سهلة وسريعة عبر واتساب.",
+      pageSubtitle: "استكشف موديلات BIAZ المتوفرة في المغرب. اطلب حذاءك بسهولة مع ميزة التجربة في المنزل والدفع عند الاستلام.",
       filterAll: "جميع الموديلات",
       filterOxford: "أوكسفورد",
       filterDerby: "ديربي",
@@ -383,10 +419,10 @@ export const TRANSLATIONS = {
       sizesLabel: "المقاسات المتاحة:",
       colorsLabel: "اللون:",
       mad: "د.م.",
-      orderButton: "اطلب عبر واتساب",
-      viewDetails: "تفاصيل الحذاء وإتمام الطلب",
-      directMessagePrefix: "مرحباً BIAZ Shoes، أود طلب حذاء:",
-      sizeHint: "اختر مقاسك أولاً ثم اضغط لرؤية تفاصيل الحذاء أو إتمام الطلب مباشرة عبر واتساب.",
+      orderButton: "اطلب الآن",
+      viewDetails: "اطلب الآن",
+      directMessagePrefix: "مرحباً BIAZ، أود طلب حذاء:",
+      sizeHint: "اختر لونك ومقاسك أولاً ثم اضغط على اطلب الآن لإتمام طلبك.",
       noResults: "لا توجد أحذية تطابق هذا الفلتر حالياً.",
     },
 
@@ -413,7 +449,7 @@ export const TRANSLATIONS = {
       finish: "التشطيب والتلميع اليدوي",
       careTitle: "إرشادات العناية بالجلد وإطالة عمره",
       betweenSizesTitle: "نصيحة المقاس من BIAZ",
-      orderCta: "أكمل الطلب الآن",
+      orderCta: "اطلب الآن",
       directOrderSubtitle: "أدخل معلومات التوصيل الخاصة بك أدناه لإتمام طلبك بكل سهولة وأمان.",
       zoomHint: "انقر لتكبير صورة الحذاء وفحص مسام الجلد ودقة الخياطة",
       closeZoom: "إغلاق التكبير",
@@ -493,11 +529,11 @@ export const TRANSLATIONS = {
 
     // 3. About Us Page
     about: {
-      pageTitle: "عن BIAZ Shoes",
+      pageTitle: "عن BIAZ",
       pageSubtitle: "شغف بالأحذية الجلدية الرجالية الفاخرة، بمقاييس رفيعة مصممة لتواكب أناقة الرجل العصري.",
       section1: {
         title: "رؤيتنا",
-        content: "انطلقت فكرة BIAZ Shoes لتقديم أحذية جلدية للرجل في المغرب توازن بين الذوق الكلاسيكي الرفيع والخامات الموثوقة. نؤمن بأن الحذاء المتقن هو استثمار حقيقي في إطلالة الرجل الواثق، ونحرص على توفير تجربة شراء صادقة ومباشرة بدون تعقيد.",
+        content: "انطلقت فكرة BIAZ لتقديم أحذية جلدية للرجل في المغرب توازن بين الذوق الكلاسيكي الرفيع والخامات الموثوقة. نؤمن بأن الحذاء المتقن هو استثمار حقيقي في إطلالة الرجل الواثق، ونحرص على توفير تجربة شراء صادقة ومباشرة بدون تعقيد.",
       },
       section2: {
         title: "فلسفة التصميم",
@@ -516,7 +552,7 @@ export const TRANSLATIONS = {
 
     // 4. Contact Us Page
     contact: {
-      pageTitle: "اتصل بنا - BIAZ Shoes",
+      pageTitle: "اتصل بنا - BIAZ",
       pageSubtitle: "نسعد بالتواصل معكم للإجابة عن استفساراتكم، ومساعدتكم في اختيار المقاس، وتأكيد طلباتكم.",
       whatsappCard: {
         title: "الطلب والاستفسار عبر واتساب",
@@ -550,18 +586,52 @@ export const TRANSLATIONS = {
       socials: {
         title: "تابعوا حساباتنا الرسمية",
         instagram: "@biazshoes",
-        facebook: "BIAZ Shoes Maroc",
+        facebook: "BIAZ Maroc",
       },
+    },
+
+    // 5. Track Order Page
+    track: {
+      pageTitle: "تتبّع طلبك",
+      pageSubtitle: "أدخل رقم الطلب ورقم الهاتف المستخدم عند تقديمه لمعرفة آخر حالة للطلب.",
+      orderIdLabel: "رقم الطلب",
+      orderIdPlaceholder: "مثال: BZ-20261028-4821",
+      phoneLabel: "رقم الهاتف المرتبط بالطلب",
+      phonePlaceholder: "مثال: 0612345678",
+      submitBtn: "تتبّع الطلب",
+      submittingBtn: "جاري البحث عن الطلب...",
+      resultTitle: "تفاصيل وبيانات طلبكم",
+      statusLabel: "الحالة الحالية للطلب",
+      orderDateLabel: "تاريخ الطلب",
+      cityLabel: "مدينة التوصيل",
+      customerLabel: "اسم المستلم",
+      itemTitle: "الحذاء المطلوب",
+      sizeLabel: "المقاس",
+      colorLabel: "اللون",
+      qtyLabel: "الكمية",
+      priceLabel: "سعر الحذاء",
+      totalLabel: "المجموع المطلوب أداؤه عند التسليم",
+      freeDeliveryBadge: "توصيل ومعاينة مجانية عند الاستلام",
+      helpText: "هل ترغب في تغيير المقاس أو تعديل العنوان قبل التوصيل؟ يمكنكم التواصل مباشرة مع فريق خدمة العملاء.",
+      notFoundError: "تعذر العثور على طلب مطابق للبيانات المدخلة. يرجى التأكد من صحة رقم الطلب ورقم الهاتف والمحاولة مجدداً.",
+      step1: "تم استلام الطلب",
+      step2: "تم التأكيد",
+      step3: "قيد التجهيز",
+      step4: "قيد التوصيل",
+      step5: "تم التسليم بنجاح",
+      stepCancelled: "تم إلغاء الطلب",
+      backHome: "العودة للرئيسية",
+      exploreMore: "تصفح موديلات أخرى",
     },
 
     // Common Footer
     footer: {
-      description: "BIAZ Shoes · علامة مغربية متخصصة في الأحذية الجلدية الرجالية الفاخرة. أناقة كلاسيكية وتشطيب متقن، مع خدمة تواصل وطلب مباشر عبر واتساب.",
+      description: "BIAZ · علامة مغربية متخصصة في الأحذية الجلدية الرجالية الفاخرة. أناقة كلاسيكية وتشطيب متقن، مع خدمة التوصيل وتجربة الحذاء في المنزل قبل الدفع.",
       navTitle: "صفحات الموقع",
       contactTitle: "معلومات التواصل",
       phone: WHATSAPP_DISPLAY,
       city: STORE_CITY_AR,
-      allRightsReserved: "جميع الحقوق محفوظة. BIAZ Shoes.",
+      allRightsReserved: "جميع الحقوق محفوظة. BIAZ.",
       madCurrency: "جميع الأسعار معلنة بالدرهم المغربي (MAD).",
     },
   },

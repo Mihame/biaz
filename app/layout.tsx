@@ -2,15 +2,15 @@ import type { Metadata, Viewport } from 'next';
 import './globals.css';
 
 export const metadata: Metadata = {
-  title: 'BIAZ Shoes - Souliers en Cuir pour Homme au Maroc',
-  description: "Boutique en ligne de souliers en cuir haut de gamme pour hommes au Maroc. Richelieus, Derbies et Mocassins d'exception. Contact et commande via WhatsApp.",
+  title: 'BIAZ - Souliers en Cuir au Maroc',
+  description: "Boutique haut de gamme de souliers en cuir pour hommes au Maroc. Richelieus, Derbies et Mocassins d'exception. Essayage à domicile et paiement à la livraison.",
   icons: {
     icon: '/assets/aistudio/favicon_147b139c.png',
     apple: '/assets/aistudio/favicon_147b139c.png',
   },
   openGraph: {
-    title: 'BIAZ Shoes - Souliers en Cuir pour Homme au Maroc',
-    description: "Boutique en ligne de souliers en cuir haut de gamme pour hommes au Maroc. Richelieus, Derbies et Mocassins d'exception. Contact et commande via WhatsApp.",
+    title: 'BIAZ - Souliers en Cuir au Maroc',
+    description: "Boutique haut de gamme de souliers en cuir pour hommes au Maroc. Richelieus, Derbies et Mocassins d'exception. Essayage à domicile et paiement à la livraison.",
     type: 'website',
     locale: 'fr_MA',
     alternateLocale: 'ar_MA',
@@ -18,8 +18,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'BIAZ Shoes - Souliers en Cuir pour Homme au Maroc',
-    description: "Boutique en ligne de souliers en cuir haut de gamme pour hommes au Maroc. Richelieus, Derbies et Mocassins d'exception. Contact et commande via WhatsApp.",
+    title: 'BIAZ - Souliers en Cuir au Maroc',
+    description: "Boutique haut de gamme de souliers en cuir pour hommes au Maroc. Richelieus, Derbies et Mocassins d'exception. Essayage à domicile et paiement à la livraison.",
   },
 };
 

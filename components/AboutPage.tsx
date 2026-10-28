@@ -29,7 +29,7 @@ export default function AboutPage() {
       <div className="relative aspect-16/9 rounded-sm overflow-hidden bg-[#F1ECE4] border border-[#E2DAD0] shadow-sm">
         <img
           src="/images/hero_oxford_leather_1792953837188.jpg"
-          alt="Atelier BIAZ Shoes"
+          alt="Atelier BIAZ"
           className="w-full h-full object-cover object-center"
         />
       </div>

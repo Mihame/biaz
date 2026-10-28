@@ -17,8 +17,8 @@ export default function ContactPage() {
     if (!message.trim()) return;
 
     const formattedMessage = language === 'fr'
-      ? `Bonjour BIAZ Shoes,\n\nJe m'appelle ${name.trim() || 'Client BIAZ'}.\n\nMessage : ${message.trim()}`
-      : `مرحباً BIAZ Shoes،\n\nالاسم : ${name.trim() || 'عميل BIAZ'}\n\nنص الرسالة والاستفسار : ${message.trim()}`;
+      ? `Bonjour BIAZ,\n\nJe m'appelle ${name.trim() || 'Client BIAZ'}.\n\nMessage : ${message.trim()}`
+      : `مرحباً BIAZ،\n\nالاسم : ${name.trim() || 'عميل BIAZ'}\n\nنص الرسالة والاستفسار : ${message.trim()}`;
 
     openWhatsApp(formattedMessage);
     setFormSentNotice(true);

@@ -79,24 +79,35 @@ export interface OrderCreationInput {
   phone: string;
   city: string;
   address: string;
+  colorId?: string;
+  colorNameFr?: string;
+  colorNameAr?: string;
+  colorHex?: string;
   notes?: string;
   language?: 'ar' | 'fr';
 }
+
+import { getProductById } from '@/lib/productsStore';
 
 /**
  * Validates, calculates and saves a new order server-side with idempotency protection
  */
 export function createOrder(input: OrderCreationInput): { order?: OrderRecord; error?: string } {
-  // 1. Validate Product
-  const product = PRODUCTS.find((p) => p.id === input.productId);
+  // 1. Validate Product (check dynamic store first, fallback to PRODUCTS)
+  const product = getProductById(input.productId) || PRODUCTS.find((p) => p.id === input.productId);
   if (!product) {
     return { error: 'المنتج المطلوب غير موجود / Produit introuvable.' };
   }
 
-  // 2. Validate Size
+  // 2. Validate Size (check against color-specific sizes if defined)
   const sizeNum = Number(input.size);
-  const isValidSize = product.availableSizes.some((s) => s.eu === sizeNum);
-  if (!isValidSize) {
+  const colorVariant = product.colors?.find((c) => c.id === input.colorId);
+  const availableSizesToCheck = (colorVariant?.availableSizes && colorVariant.availableSizes.length > 0)
+    ? colorVariant.availableSizes
+    : product.availableSizes;
+
+  const matchingSize = availableSizesToCheck.find((s) => s.eu === sizeNum);
+  if (!matchingSize) {
     return { error: `المقاس ${input.size} غير متوفر لهذا الموديل / Pointure non disponible pour ce modèle.` };
   }
 
@@ -108,6 +119,9 @@ export function createOrder(input: OrderCreationInput): { order?: OrderRecord; e
   const cleanPhone = (input.phone || '').trim();
   const cleanCity = (input.city || '').trim();
   const cleanAddress = (input.address || '').trim();
+  const selectedColorFr = input.colorNameFr?.trim() || product.colorNameFr;
+  const selectedColorAr = input.colorNameAr?.trim() || product.colorNameAr;
+  const selectedColorHex = input.colorHex?.trim() || product.colorHex;
 
   if (!cleanName) {
     return { error: 'يرجى كتابة الاسم الكامل / Veuillez renseigner votre nom complet.' };
@@ -122,8 +136,8 @@ export function createOrder(input: OrderCreationInput): { order?: OrderRecord; e
     return { error: 'يرجى كتابة عنوان التوصيل بالتفصيل / Veuillez renseigner votre adresse de livraison.' };
   }
 
-  // Idempotency check: hash customer phone + product + size within 15 seconds
-  const idempotencyKey = `${cleanPhone}_${product.id}_${sizeNum}_${qty}`;
+  // Idempotency check: hash customer phone + product + size + color within 15 seconds
+  const idempotencyKey = `${cleanPhone}_${product.id}_${sizeNum}_${qty}_${selectedColorFr}`;
   const now = Date.now();
   const existingSub = recentSubmissionsCache.get(idempotencyKey);
   if (existingSub && now - existingSub.timestamp < 15000) {
@@ -152,8 +166,10 @@ export function createOrder(input: OrderCreationInput): { order?: OrderRecord; e
       modelName: product.modelName,
       shoeTypeFr: product.shoeTypeFr,
       shoeTypeAr: product.shoeTypeAr,
-      colorNameFr: product.colorNameFr,
-      colorNameAr: product.colorNameAr,
+      colorNameFr: selectedColorFr,
+      colorNameAr: selectedColorAr,
+      colorHex: selectedColorHex,
+      colorId: input.colorId,
       unitPriceMAD: unitPrice,
       size: sizeNum,
       quantity: qty,
@@ -212,6 +228,45 @@ export function deleteOrder(orderId: string): boolean {
 
 export function getOrderById(orderId: string): OrderRecord | undefined {
   return ordersMemoryStore.get(orderId);
+}
+
+/**
+ * Normalizes phone numbers by stripping non-digits and unifying Moroccan prefixes
+ */
+export function normalizePhone(phone: string): string {
+  if (!phone) return '';
+  const digits = phone.replace(/\D/g, '');
+  if (digits.startsWith('212') && digits.length >= 11) {
+    return '0' + digits.slice(3);
+  }
+  return digits;
+}
+
+/**
+ * Secure customer order tracking:
+ * Matches both orderId and phone number from database with format tolerance.
+ */
+export function trackOrder(orderIdInput: string, phoneInput: string): OrderRecord | null {
+  loadFileStore();
+  if (!orderIdInput || !phoneInput) return null;
+
+  const cleanOrderId = orderIdInput.trim().toUpperCase();
+  const inputTail9 = normalizePhone(phoneInput).slice(-9);
+
+  if (!cleanOrderId || !inputTail9 || inputTail9.length < 8) {
+    return null;
+  }
+
+  // Find by order ID
+  const order = ordersMemoryStore.get(cleanOrderId);
+  if (!order) return null;
+
+  const orderTail9 = normalizePhone(order.customer.phone).slice(-9);
+  if (orderTail9 === inputTail9) {
+    return order;
+  }
+
+  return null;
 }
 
 export function getAllOrders(): OrderRecord[] {

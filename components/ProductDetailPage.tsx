@@ -1,8 +1,8 @@
 'use client';
 
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef, useEffect, useMemo } from 'react';
 import { useShop } from '@/context/ShopContext';
-import { PRODUCTS } from '@/data/products';
+import { PRODUCTS, getProductColors } from '@/data/products';
 import { MOROCCAN_CITIES } from '@/data/moroccoCities';
 import {
   AlertCircle,
@@ -36,13 +36,36 @@ interface ProductDetailPageProps {
 }
 
 export default function ProductDetailPage({ productId, onBack }: ProductDetailPageProps) {
-  const { language, direction, t, navigateTo } = useShop();
-  const product = PRODUCTS.find((p) => p.id === productId) || PRODUCTS[0];
+  const { language, direction, t, navigateTo, products } = useShop();
+  const product = (products && products.find((p) => p.id === productId)) || PRODUCTS.find((p) => p.id === productId) || PRODUCTS[0];
 
   // Image Gallery & Zoom State
   const [activeImageIndex, setActiveImageIndex] = useState(0);
   const [isZoomOpen, setIsZoomOpen] = useState(false);
   const [zoomScale, setZoomScale] = useState(1);
+  const [isHoverZooming, setIsHoverZooming] = useState(false);
+  const [zoomOrigin, setZoomOrigin] = useState({ x: 50, y: 50 });
+
+  // Color Variants State
+  const availableColors = useMemo(() => getProductColors(product), [product]);
+  const [selectedColorState, setSelectedColorState] = useState<{ prodId: string; colorId: string }>({
+    prodId: product.id,
+    colorId: availableColors[0]?.id || 'c-default',
+  });
+
+  const selectedColorId = selectedColorState.prodId === product.id
+    ? selectedColorState.colorId
+    : (availableColors[0]?.id || 'c-default');
+
+  const setSelectedColorId = (colorId: string) => {
+    setSelectedColorState({ prodId: product.id, colorId });
+    setActiveImageIndex(0);
+    setSelectedSize(null);
+  };
+
+  const activeColorVariant = useMemo(() => {
+    return availableColors.find((c) => c.id === selectedColorId) || availableColors[0];
+  }, [availableColors, selectedColorId]);
 
   // Selection State
   const [selectedSize, setSelectedSize] = useState<number | null>(null);
@@ -76,11 +99,12 @@ export default function ProductDetailPage({ productId, onBack }: ProductDetailPa
   const PrevIcon = direction === 'rtl' ? ChevronRight : ChevronLeft;
   const NextIcon = direction === 'rtl' ? ChevronLeft : ChevronRight;
 
+  const activeColorName = language === 'fr' ? activeColorVariant.colorNameFr : activeColorVariant.colorNameAr;
   const displayName = language === 'fr'
-    ? `${product.modelName} ${product.colorNameFr}`
-    : `${product.modelName} ${product.colorNameAr}`;
+    ? `${product.modelName} ${activeColorVariant.colorNameFr}`
+    : `${product.modelName} ${activeColorVariant.colorNameAr}`;
   const displayType = language === 'fr' ? product.shoeTypeFr : product.shoeTypeAr;
-  const displayColor = language === 'fr' ? product.colorNameFr : product.colorNameAr;
+  const displayColor = activeColorName;
   const displayDesc = language === 'fr' ? product.descriptionFr : product.descriptionAr;
   const displayAdvice = language === 'fr' ? product.betweenSizesAdviceFr : product.betweenSizesAdviceAr;
   const careGuide = language === 'fr' ? product.careGuideFr : product.careGuideAr;
@@ -90,15 +114,22 @@ export default function ProductDetailPage({ productId, onBack }: ProductDetailPa
     return text.replace(/^\[PLACEHOLDER\s*:\s*/i, '').replace(/\]$/, '').trim();
   };
 
-  // Strictly enforce maximum 3 authentic images per product as requested
-  const images = (product.images && product.images.length > 0 ? product.images : [
-    {
-      label: 'Vue principale',
-      angle: 'side' as const,
-      url: '/images/hero_oxford_leather_1792953837188.jpg',
-      alt: displayName,
-    },
-  ]).slice(0, 3);
+  // Strictly enforce maximum 3 authentic images per color variant
+  const rawVariantImages = (activeColorVariant?.images && activeColorVariant.images.length > 0)
+    ? activeColorVariant.images
+    : (product.images && product.images.length > 0 ? product.images : [
+        {
+          label: 'Vue principale',
+          angle: 'side' as const,
+          url: '/images/hero_oxford_leather_1792953837188.jpg',
+          alt: displayName,
+        },
+      ]);
+  const images = rawVariantImages.slice(0, 3);
+
+  const availableSizesList = (activeColorVariant?.availableSizes && activeColorVariant.availableSizes.length > 0)
+    ? activeColorVariant.availableSizes
+    : product.availableSizes;
 
   const safeActiveIndex = Math.min(activeImageIndex, Math.max(0, images.length - 1));
   const currentImage = images[safeActiveIndex] || images[0];
@@ -111,6 +142,24 @@ export default function ProductDetailPage({ productId, onBack }: ProductDetailPa
 
   const handleNextImage = () => {
     setActiveImageIndex((prev) => (prev < images.length - 1 ? prev + 1 : 0));
+  };
+
+  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    const rect = e.currentTarget.getBoundingClientRect();
+    if (!rect.width || !rect.height) return;
+    const x = Math.max(0, Math.min(100, ((e.clientX - rect.left) / rect.width) * 100));
+    const y = Math.max(0, Math.min(100, ((e.clientY - rect.top) / rect.height) * 100));
+    setZoomOrigin({ x, y });
+  };
+
+  const handleMouseEnter = (e: React.MouseEvent<HTMLDivElement>) => {
+    setIsHoverZooming(true);
+    handleMouseMove(e);
+  };
+
+  const handleMouseLeave = () => {
+    setIsHoverZooming(false);
+    setZoomOrigin({ x: 50, y: 50 });
   };
 
   const scrollToSlide = (idx: number) => {
@@ -227,6 +276,10 @@ export default function ProductDetailPage({ productId, onBack }: ProductDetailPa
           address: address.trim(),
           notes: notes.trim(),
           language,
+          colorId: activeColorVariant.id,
+          colorNameFr: activeColorVariant.colorNameFr,
+          colorNameAr: activeColorVariant.colorNameAr,
+          colorHex: activeColorVariant.colorHex,
         }),
       });
 
@@ -539,74 +592,30 @@ export default function ProductDetailPage({ productId, onBack }: ProductDetailPa
             
             {/* Desktop Editorial Gallery */}
             <div className="hidden sm:block space-y-3">
-              {/* Primary Large Stage View */}
+              {/* Primary Large Stage View with Pure Clean Presentation & Smooth Inner Hover Zoom */}
               <div
+                onMouseEnter={handleMouseEnter}
+                onMouseMove={handleMouseMove}
+                onMouseLeave={handleMouseLeave}
                 onClick={() => setIsZoomOpen(true)}
-                className="relative aspect-[4/3] bg-[#F7F5F0] rounded-xs border border-[#E2DAD0] overflow-hidden group cursor-zoom-in shadow-2xs"
+                className="relative aspect-[4/3] bg-[#F7F5F0] rounded-xs border border-[#E2DAD0] overflow-hidden cursor-crosshair select-none shadow-2xs"
+                title={language === 'fr' ? 'Survolez pour agrandir les détails' : 'مرر الفأرة لتكبير تفاصيل الحذاء والجلد'}
               >
                 <img
                   src={currentImage.url}
                   alt={currentImage.alt || displayName}
-                  className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-[1.015]"
-                />
-
-                {/* Angle Tag Kicker */}
-                <div className="absolute top-3.5 start-3.5 bg-white/95 text-[#1E1A17] text-xs px-3 py-1.5 rounded-xs border border-[#E2DAD0] font-semibold shadow-2xs flex items-center gap-1.5 backdrop-blur-xs">
-                  <Sparkles className="w-3.5 h-3.5 text-[#9A5B2E]" />
-                  <span>{getAngleLabel(currentImage.angle, currentImage.label)}</span>
-                </div>
-
-                {/* Minimalist Image Counter (e.g. 01 / 03) */}
-                <div className="absolute top-3.5 end-3.5 bg-[#1E1A17]/85 text-white text-[11px] font-mono px-2.5 py-1 rounded-xs backdrop-blur-xs flex items-center gap-1">
-                  <span>0{safeActiveIndex + 1}</span>
-                  <span className="opacity-60">/</span>
-                  <span className="opacity-80">0{images.length}</span>
-                </div>
-
-                {/* Zoom CTA Button */}
-                <button
-                  type="button"
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    setIsZoomOpen(true);
+                  style={{
+                    transformOrigin: `${zoomOrigin.x}% ${zoomOrigin.y}%`,
+                    transform: isHoverZooming ? 'scale(1.85)' : 'scale(1)',
+                    transition: isHoverZooming
+                      ? 'transform 0.1s ease-out'
+                      : 'transform 0.3s cubic-bezier(0.2, 0, 0, 1), transform-origin 0.3s cubic-bezier(0.2, 0, 0, 1)',
                   }}
-                  className="absolute bottom-3.5 end-3.5 bg-white/95 hover:bg-[#1E1A17] text-[#1E1A17] hover:text-white text-xs px-3 py-1.5 rounded-xs border border-[#E2DAD0] shadow-sm transition-all flex items-center gap-1.5 cursor-pointer backdrop-blur-xs font-semibold"
-                  title={t.productDetail.zoomHint}
-                >
-                  <Maximize2 className="w-3.5 h-3.5 text-[#9A5B2E]" />
-                  <span>{language === 'fr' ? 'Agrandir les détails' : 'تكبير تفاصيل الحذاء'}</span>
-                </button>
-
-                {/* Desktop Prev / Next hover navigation */}
-                {images.length > 1 && (
-                  <>
-                    <button
-                      type="button"
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        handlePrevImage();
-                      }}
-                      className="absolute start-3 top-1/2 -translate-y-1/2 w-9 h-9 rounded-full bg-white/90 hover:bg-white text-[#1E1A17] flex items-center justify-center shadow-md border border-[#E2DAD0] transition-opacity cursor-pointer opacity-0 group-hover:opacity-100"
-                      aria-label="Previous image"
-                    >
-                      <PrevIcon className="w-4 h-4" />
-                    </button>
-                    <button
-                      type="button"
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        handleNextImage();
-                      }}
-                      className="absolute end-3 top-1/2 -translate-y-1/2 w-9 h-9 rounded-full bg-white/90 hover:bg-white text-[#1E1A17] flex items-center justify-center shadow-md border border-[#E2DAD0] transition-opacity cursor-pointer opacity-0 group-hover:opacity-100"
-                      aria-label="Next image"
-                    >
-                      <NextIcon className="w-4 h-4" />
-                    </button>
-                  </>
-                )}
+                  className="w-full h-full object-cover pointer-events-none will-change-transform"
+                />
               </div>
 
-              {/* Balanced Editorial Secondary Cards (Max 3 Total Images) */}
+              {/* Balanced 3-Thumbnail Row */}
               {images.length > 1 && (
                 <div className={`grid gap-3 ${images.length === 2 ? 'grid-cols-2' : 'grid-cols-3'}`}>
                   {images.map((img, idx) => {
@@ -615,7 +624,11 @@ export default function ProductDetailPage({ productId, onBack }: ProductDetailPa
                       <button
                         key={idx}
                         type="button"
-                        onClick={() => setActiveImageIndex(idx)}
+                        onClick={() => {
+                          setActiveImageIndex(idx);
+                          setIsHoverZooming(false);
+                          setZoomOrigin({ x: 50, y: 50 });
+                        }}
                         className={`group/thumb text-start p-2 rounded-xs border transition-all cursor-pointer bg-white relative ${
                           isActive
                             ? 'border-[#9A5B2E] ring-1 ring-[#9A5B2E]/40 bg-[#FAF8F5]'
@@ -631,15 +644,6 @@ export default function ProductDetailPage({ productId, onBack }: ProductDetailPa
                           {isActive && (
                             <div className="absolute inset-0 bg-[#9A5B2E]/10 pointer-events-none" />
                           )}
-                          <div className="absolute top-1.5 start-1.5 w-1.5 h-1.5 rounded-full bg-[#9A5B2E] opacity-0 group-hover/thumb:opacity-100 transition-opacity" />
-                        </div>
-                        <div className="mt-1.5 flex items-center justify-between text-[11px] leading-tight">
-                          <span className={`font-semibold truncate ${isActive ? 'text-[#9A5B2E]' : 'text-[#1E1A17]'}`}>
-                            {getAngleLabel(img.angle, img.label)}
-                          </span>
-                          <span className="text-[#6B635B] font-mono text-[10px] shrink-0">
-                            0{idx + 1}
-                          </span>
                         </div>
                       </button>
                     );
@@ -648,68 +652,78 @@ export default function ProductDetailPage({ productId, onBack }: ProductDetailPa
               )}
             </div>
 
-            {/* Mobile Touch-Friendly Swipeable Gallery */}
-            <div className="sm:hidden space-y-2">
-              <div className="relative">
-                <div
-                  ref={mobileScrollRef}
-                  onScroll={handleMobileScroll}
-                  className="flex overflow-x-auto snap-x snap-mandatory scrollbar-none scroll-smooth rounded-xs border border-[#E2DAD0] bg-[#F7F5F0]"
-                >
-                  {images.map((img, idx) => (
-                    <div
-                      key={idx}
-                      onClick={() => {
-                        setActiveImageIndex(idx);
-                        setIsZoomOpen(true);
-                      }}
-                      className="w-full shrink-0 snap-center aspect-[4/3] relative overflow-hidden cursor-zoom-in"
-                    >
-                      <img
-                        src={img.url}
-                        alt={img.alt || displayName}
-                        className="w-full h-full object-cover"
-                      />
-                      {/* Quiet Angle Tag */}
-                      <div className="absolute top-3 start-3 bg-white/95 text-[#1E1A17] text-[11px] px-2.5 py-1 rounded-xs border border-[#E2DAD0] font-semibold shadow-2xs">
-                        {getAngleLabel(img.angle, img.label)}
-                      </div>
-                    </div>
-                  ))}
-                </div>
-
-                {/* Minimalist Mobile Image Indicator: e.g. 1 / 3 */}
-                <div className="absolute bottom-3 end-3 bg-black/75 backdrop-blur-xs text-white text-[11px] font-mono px-2.5 py-1 rounded-xs flex items-center gap-1 shadow-sm">
-                  <span>{safeActiveIndex + 1}</span>
-                  <span className="opacity-60">/</span>
-                  <span className="opacity-80">{images.length}</span>
-                </div>
-
-                {/* Minimalist Mobile Zoom Trigger */}
-                <button
-                  type="button"
-                  onClick={() => setIsZoomOpen(true)}
-                  className="absolute bottom-3 start-3 bg-white/95 text-[#1E1A17] text-[11px] px-2.5 py-1 rounded-xs border border-[#E2DAD0] flex items-center gap-1 shadow-2xs font-semibold"
-                >
-                  <Maximize2 className="w-3.5 h-3.5 text-[#9A5B2E]" />
-                  <span>{language === 'fr' ? 'Agrandir' : 'تكبير'}</span>
-                </button>
+            {/* Mobile Touch-Friendly Clean Swipeable Gallery */}
+            <div className="sm:hidden space-y-3">
+              {/* Clean Main Stage (Zero intrusive overlays, tap opens full-screen view) */}
+              <div
+                ref={mobileScrollRef}
+                onScroll={handleMobileScroll}
+                className="flex overflow-x-auto snap-x snap-mandatory scrollbar-none scroll-smooth rounded-xs border border-[#E2DAD0] bg-[#F7F5F0]"
+              >
+                {images.map((img, idx) => (
+                  <div
+                    key={idx}
+                    onClick={() => {
+                      setActiveImageIndex(idx);
+                      setIsZoomOpen(true);
+                    }}
+                    className="w-full shrink-0 snap-center aspect-[4/3] relative overflow-hidden cursor-pointer"
+                  >
+                    <img
+                      src={img.url}
+                      alt={img.alt || displayName}
+                      className="w-full h-full object-cover select-none"
+                    />
+                  </div>
+                ))}
               </div>
 
-              {/* Touch Indicator Dots */}
+              {/* Mobile 3 Clean Mini Thumbnails */}
               {images.length > 1 && (
-                <div className="flex items-center justify-center gap-2 pt-1">
+                <div className={`grid gap-2 ${images.length === 2 ? 'grid-cols-2' : 'grid-cols-3'}`}>
+                  {images.map((img, idx) => {
+                    const isActive = idx === safeActiveIndex;
+                    return (
+                      <button
+                        key={idx}
+                        type="button"
+                        onClick={() => scrollToSlide(idx)}
+                        className={`p-1 rounded-xs border transition-all cursor-pointer bg-white text-center ${
+                          isActive
+                            ? 'border-[#9A5B2E] ring-1 ring-[#9A5B2E]/40 bg-[#FAF8F5]'
+                            : 'border-[#E2DAD0] hover:border-[#9A5B2E]/60'
+                        }`}
+                      >
+                        <div className="aspect-[4/3] bg-[#F7F5F0] rounded-xs overflow-hidden relative border border-[#E2DAD0]/40">
+                          <img
+                            src={img.url}
+                            alt=""
+                            className="w-full h-full object-cover"
+                          />
+                          {isActive && (
+                            <div className="absolute inset-0 bg-[#9A5B2E]/10 pointer-events-none" />
+                          )}
+                        </div>
+                      </button>
+                    );
+                  })}
+                </div>
+              )}
+
+              {/* Mobile Subtle Dot Indicators */}
+              {images.length > 1 && (
+                <div className="flex items-center justify-center gap-1.5 pt-0.5">
                   {images.map((_, idx) => (
                     <button
                       key={idx}
                       type="button"
                       onClick={() => scrollToSlide(idx)}
-                      className={`h-1.5 transition-all rounded-full cursor-pointer ${
+                      className={`h-1 transition-all rounded-full cursor-pointer ${
                         idx === safeActiveIndex
-                          ? 'w-6 bg-[#9A5B2E]'
-                          : 'w-2 bg-[#E2DAD0]'
+                          ? 'w-5 bg-[#9A5B2E]'
+                          : 'w-1.5 bg-[#E2DAD0]'
                       }`}
-                      aria-label={`Image ${idx + 1}`}
+                      aria-label={`Slide ${idx + 1}`}
                     />
                   ))}
                 </div>
@@ -729,13 +743,6 @@ export default function ProductDetailPage({ productId, onBack }: ProductDetailPa
               <h1 className="text-2xl sm:text-3xl font-heading-latin rtl:font-heading-arabic font-bold text-[#1E1A17] leading-tight">
                 {displayName}
               </h1>
-
-              {/* Color swatch & name */}
-              <div className="flex items-center gap-2 pt-1 text-xs text-[#6B635B]">
-                <span className="font-medium text-[#1E1A17]">{t.products.colorsLabel}</span>
-                <span className="inline-block w-3.5 h-3.5 rounded-full border border-black/20" style={{ backgroundColor: product.colorHex }} />
-                <span>{displayColor}</span>
-              </div>
             </div>
 
             {/* 3. Price in Moroccan Dirham & Live Stock Status */}
@@ -762,7 +769,78 @@ export default function ProductDetailPage({ productId, onBack }: ProductDetailPa
               </p>
             </div>
 
-            {/* 5. Available Sizes Selector */}
+            {/* 5. Luxury Shoe Color Variant Selector */}
+            <div className="space-y-3 pt-1 text-start">
+              <div className="flex items-center justify-between text-xs">
+                <div className="flex items-center gap-2">
+                  <span className="font-bold uppercase tracking-wider text-[#1E1A17]">
+                    {language === 'fr' ? 'COULEUR' : 'اللون'}
+                  </span>
+                  <span className="text-[#6B635B]">—</span>
+                  <span className="font-semibold text-[#9A5B2E]">{activeColorName}</span>
+                </div>
+                <span className="text-[11px] font-medium text-[#6B635B]">
+                  {availableColors.length}{' '}
+                  {language === 'fr'
+                    ? availableColors.length > 1
+                      ? 'couleurs disponibles'
+                      : 'couleur'
+                    : availableColors.length === 2
+                    ? 'لونان متوفران'
+                    : availableColors.length > 2 && availableColors.length < 11
+                    ? 'ألوان متوفرة'
+                    : 'لون متوفر'}
+                </span>
+              </div>
+
+              {/* Swatch row with real shoe photo thumbnails */}
+              <div className="flex items-center gap-2.5 overflow-x-auto pb-1.5 scrollbar-none snap-x">
+                {availableColors.map((colorVariant) => {
+                  const isSelected = colorVariant.id === activeColorVariant.id;
+                  const variantThumb = colorVariant.images?.[0]?.url || product.images?.[0]?.url;
+                  const variantName = language === 'fr' ? colorVariant.colorNameFr : colorVariant.colorNameAr;
+
+                  return (
+                    <button
+                      key={colorVariant.id}
+                      type="button"
+                      onClick={() => {
+                        setSelectedColorId(colorVariant.id);
+                        setActiveImageIndex(0);
+                      }}
+                      className={`group/color relative shrink-0 w-16 h-16 sm:w-20 sm:h-20 rounded-xs overflow-hidden transition-all duration-200 cursor-pointer snap-start bg-[#F7F5F0] ${
+                        isSelected
+                          ? 'ring-2 ring-[#1E1A17] ring-offset-2 ring-offset-[#FAF8F5] shadow-xs'
+                          : 'border border-[#E2DAD0] hover:border-[#1E1A17]/60 opacity-80 hover:opacity-100'
+                      }`}
+                      title={variantName}
+                      aria-label={variantName}
+                    >
+                      {/* Authentic Shoe Photo Thumbnail */}
+                      <img
+                        src={variantThumb}
+                        alt={variantName}
+                        className="w-full h-full object-cover group-hover/color:scale-105 transition-transform duration-300"
+                      />
+
+                      {/* Subtle Corner Color Dot */}
+                      <span
+                        className="absolute bottom-1 right-1 rtl:right-auto rtl:left-1 w-3.5 h-3.5 rounded-full border border-white shadow-xs"
+                        style={{ backgroundColor: colorVariant.colorHex }}
+                        title={variantName}
+                      />
+
+                      {/* Active subtle overlay */}
+                      {isSelected && (
+                        <div className="absolute inset-0 bg-[#1E1A17]/5 pointer-events-none" />
+                      )}
+                    </button>
+                  );
+                })}
+              </div>
+            </div>
+
+            {/* 6. Available Sizes Selector */}
             <div
               ref={sizeSelectorRef}
               className={`p-4 sm:p-5 rounded-xs border transition-all text-start space-y-3 ${
@@ -786,28 +864,54 @@ export default function ProductDetailPage({ productId, onBack }: ProductDetailPa
                 )}
               </div>
 
+              {/* Out of Stock Warning for Color */}
+              {activeColorVariant?.inStock === false && (
+                <div className="p-3 bg-amber-50/80 border border-amber-300 rounded-xs text-xs text-amber-900 font-bold flex items-center gap-2">
+                  <Info className="w-4 h-4 text-amber-700 shrink-0" />
+                  <span>
+                    {language === 'fr'
+                      ? 'Ce coloris est actuellement indisponible en stock.'
+                      : 'هذا اللون غير متوفر حالياً في المخزون.'}
+                  </span>
+                </div>
+              )}
+
               {/* Size Buttons Grid */}
               <div className="grid grid-cols-4 sm:grid-cols-7 gap-2">
-                {product.availableSizes.map((sizeObj) => {
+                {availableSizesList.map((sizeObj) => {
                   const isSelected = selectedSize === sizeObj.eu;
+                  const isSizeUnavailable =
+                    activeColorVariant?.inStock === false ||
+                    (sizeObj.stock !== undefined && sizeObj.stock <= 0);
 
                   return (
                     <button
                       key={sizeObj.eu}
                       type="button"
+                      disabled={isSizeUnavailable}
                       onClick={() => {
+                        if (isSizeUnavailable) return;
                         setSelectedSize(sizeObj.eu);
                         setFormErrors((prev) => ({ ...prev, size: undefined }));
                       }}
-                      className={`min-h-[44px] text-xs font-bold rounded-xs border transition-all flex flex-col items-center justify-center p-1 cursor-pointer ${
-                        isSelected
-                          ? 'bg-[#1E1A17] text-white border-[#1E1A17] shadow-sm'
-                          : 'bg-[#FAF8F5] text-[#1E1A17] border-[#E2DAD0] hover:border-[#9A5B2E] hover:bg-white'
+                      title={
+                        isSizeUnavailable
+                          ? (language === 'fr' ? 'Pointure non disponible' : 'المقاس غير متوفر بهذا اللون')
+                          : (language === 'fr' ? `Pointure ${sizeObj.eu}` : `المقاس ${sizeObj.eu}`)
+                      }
+                      className={`min-h-[44px] text-xs font-bold rounded-xs border transition-all flex flex-col items-center justify-center p-1 ${
+                        isSizeUnavailable
+                          ? 'opacity-40 bg-[#F7F5F0] text-[#A8A29E] border-dashed border-[#D6CFC7] cursor-not-allowed line-through'
+                          : isSelected
+                          ? 'bg-[#1E1A17] text-white border-[#1E1A17] shadow-sm cursor-pointer'
+                          : 'bg-[#FAF8F5] text-[#1E1A17] border-[#E2DAD0] hover:border-[#9A5B2E] hover:bg-white cursor-pointer'
                       }`}
                     >
                       <span className="text-sm font-bold">{sizeObj.eu}</span>
                       <span className={`text-[9px] ${isSelected ? 'text-white/80' : 'text-[#6B635B]'}`}>
-                        {sizeObj.cm} cm
+                        {isSizeUnavailable
+                          ? (language === 'fr' ? 'Épuisé' : 'نفد')
+                          : sizeObj.cm ? `${sizeObj.cm} cm` : (sizeObj.status === 'low_stock' ? (language === 'fr' ? 'Limité' : 'محدود') : 'متوفر')}
                       </span>
                     </button>
                   );

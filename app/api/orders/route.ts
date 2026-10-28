@@ -20,6 +20,10 @@ export async function POST(req: NextRequest) {
       phone,
       city,
       address,
+      colorId,
+      colorNameFr,
+      colorNameAr,
+      colorHex,
       notes,
       language,
     } = body;
@@ -47,6 +51,10 @@ export async function POST(req: NextRequest) {
       phone: String(phone),
       city: String(city),
       address: String(address),
+      colorId: colorId ? String(colorId) : undefined,
+      colorNameFr: colorNameFr ? String(colorNameFr) : undefined,
+      colorNameAr: colorNameAr ? String(colorNameAr) : undefined,
+      colorHex: colorHex ? String(colorHex) : undefined,
       notes: notes ? String(notes) : undefined,
       language: language === 'ar' ? 'ar' : 'fr',
     });
